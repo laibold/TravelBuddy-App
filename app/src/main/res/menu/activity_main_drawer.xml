@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_travels"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_travels" />
+        <item
+            android:id="@+id/nav_stops"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_stops" />
+        <item
+            android:id="@+id/nav_diary"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_diary" />
+        <item
+            android:id="@+id/nav_documents"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_documents" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_finances"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_finances" />
+            <item
+                android:id="@+id/nav_debts"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_debts" />
+        </menu>
+    </item>
+
+</menu>
