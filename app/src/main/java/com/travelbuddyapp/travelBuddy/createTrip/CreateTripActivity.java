@@ -1,8 +1,8 @@
-package com.travelbuddyapp.travelBuddy.newTravel;
+package com.travelbuddyapp.travelBuddy.createTrip;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.utils.DatePickerFragement;
 
 import java.text.DateFormat;
@@ -83,6 +83,18 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         }
 
         if (!haserrors){
+
+            Intent data = new Intent();
+
+            //---set the data to pass back---
+            data.putExtra("newTrip",
+                    new Trip(
+                            tripNameTextView.getText().toString(),
+                            startDateTextView.getText().toString(),
+                            endDateTextView.getText().toString(),
+                            R.drawable.vietnam));
+            setResult(RESULT_OK, data);
+
             finish();
         }
     }

@@ -8,20 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TravelListAdapter extends ArrayAdapter<String> {
+import com.travelbuddyapp.travelBuddy.model.Trip;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
+
+public class TravelListAdapter extends ArrayAdapter<Trip> {
     private final Activity context;
-    private final String[] maintitle;
-    private final String[] subtitle;
-    private final Integer[] imgid;
+    private final ArrayList<Trip> trips;
 
-
-    public TravelListAdapter(Activity context, String[] maintitle, String[] subtitle, Integer[] imgid){
-        super(context, R.layout.travellist_cell, maintitle);
-
+    public TravelListAdapter(Activity context, ArrayList<Trip> trips){
+        super(context, R.layout.travellist_cell, trips);
         this.context = context;
-        this.maintitle = maintitle;
-        this.subtitle = subtitle;
-        this.imgid = imgid;
+        this.trips = trips;
     }
 
     public View getView(int position, View view, ViewGroup parent){
@@ -32,9 +32,11 @@ public class TravelListAdapter extends ArrayAdapter<String> {
         ImageView imageView = rowView.findViewById(R.id.createTrip_travelicon_image);
         TextView subtitleText = rowView.findViewById(R.id.travelsubtitle);
 
-        titleText.setText((maintitle[position]));
-        imageView.setImageResource(imgid[position]);
-        subtitleText.setText(subtitle[position]);
+        titleText.setText(trips.get(position).getName());
+        imageView.setImageResource(trips.get(position).getImageResource());
+
+        Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+        subtitleText.setText(trips.get(position).getStartDate().format(DateTimeFormatter.ofPattern("MMMM yyyy", locale)));
 
         return rowView;
     }

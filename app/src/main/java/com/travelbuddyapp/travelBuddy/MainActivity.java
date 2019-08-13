@@ -15,28 +15,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ListView;
 
-import com.travelbuddyapp.travelBuddy.newTravel.CreateTripActivity;
+import com.travelbuddyapp.travelBuddy.business.TripManager;
+import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
+import com.travelbuddyapp.travelBuddy.model.Trip;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView travelListView;
-    String[] maintitle ={
-            "Thailand","Vietbotschkok",
-            "Portugal & Spanien","Uganda"
-    };
+    TravelListAdapter travelListAdapter;
 
-    String[] subtitle ={
-            "Februar 2018 | Du, Pasi, Masl","April 2019 | Du, Masl",
-            "August 2019 | Du, Räbbi","Januar 2023 | Du"
-    };
-
-    Integer[] imgid={
-            R.drawable.thailand,
-            R.drawable.vietnam,
-            R.drawable.portugal,
-            R.drawable.uganda
-    };
+    ArrayList<Trip> trips= new ArrayList<>();
+    TripManager tripManager = new TripManager();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -53,7 +45,14 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        TravelListAdapter travelListAdapter = new TravelListAdapter(this, maintitle, subtitle, imgid);
+        /////
+        tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
+        tripManager.addTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
+        tripManager.addTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
+        tripManager.addTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
+        ////
+
+        travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
         travelListView = findViewById(R.id.travellist);
         travelListView.setAdapter(travelListAdapter);
 
@@ -99,7 +98,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onNewTravelPressed(){
-        startActivity(new Intent(MainActivity.this, CreateTripActivity.class));
+        startActivityForResult(new Intent(MainActivity.this, CreateTripActivity.class),R.integer.createTrip);
+    }
+
+    //Result from createTrip
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == R.integer.createTrip) {
+            if (resultCode == RESULT_OK) {
+                Trip newTrip = data.getParcelableExtra("newTrip");
+                tripManager.addTrip(newTrip);
+                travelListAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
