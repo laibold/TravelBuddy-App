@@ -9,16 +9,18 @@
     tools:showIn="@layout/app_bar_main">
 
     <ListView
-        android:id="@+id/travellist"
+        android:id="@+id/content_main_trips_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="70dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/colorPrimary">
     </ListView>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_travel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +30,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         app:backgroundTint="#FCFBFB"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:onClick="onNewTripPressed"/>
 
 </RelativeLayout>

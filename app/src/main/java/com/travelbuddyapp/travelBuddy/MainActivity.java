@@ -2,17 +2,17 @@ package com.travelbuddyapp.travelBuddy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.travelbuddyapp.travelBuddy.business.TripManager;
@@ -30,12 +30,16 @@ public class MainActivity extends AppCompatActivity
     ArrayList<Trip> trips= new ArrayList<>();
     TripManager tripManager = new TripManager();
 
+    Trip selectedTrip; //TODO zuletzt gewaehlten in JSON festhalten
+    int createTripReqCode = getResources().getInteger(R.integer.createTrip);
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        /////
+        /////Prototype
         tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
         tripManager.addTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
         tripManager.addTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
@@ -53,14 +57,13 @@ public class MainActivity extends AppCompatActivity
         ////
 
         travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
-        travelListView = findViewById(R.id.travellist);
+        travelListView = findViewById(R.id.content_main_trips_list);
         travelListView.setAdapter(travelListAdapter);
 
-        FloatingActionButton addTravelBtn = findViewById(R.id.add_travel_btn);
-        addTravelBtn.setOnClickListener(new View.OnClickListener() {
+        travelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                onNewTravelPressed();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedTrip = travelListAdapter.getItem(position);
             }
         });
     }
@@ -97,13 +100,17 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void onNewTravelPressed(){
-        startActivityForResult(new Intent(MainActivity.this, CreateTripActivity.class),R.integer.createTrip);
+    public void onNewTripPressed(View v){
+        startActivityForResult(new Intent(MainActivity.this, CreateTripActivity.class), createTripReqCode);
+    }
+
+    public void onTripSelected(){
+        //this.selectedTrip =
     }
 
     //Result from createTrip
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == R.integer.createTrip) {
+        if (requestCode == createTripReqCode) {
             if (resultCode == RESULT_OK) {
                 Trip newTrip = data.getParcelableExtra("newTrip");
                 tripManager.addTrip(newTrip);
