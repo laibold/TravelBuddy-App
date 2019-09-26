@@ -5,10 +5,14 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.travelbuddyapp.travelBuddy.model.Config;
+import com.travelbuddyapp.travelBuddy.model.LocalDateConverter;
+import com.travelbuddyapp.travelBuddy.model.Trip;
 
-@Database(entities = {Config.class}, version = 1)//, exportSchema = false)
+@Database(entities = {Config.class, Trip.class}, version = 4)//, exportSchema = false)
+@TypeConverters({LocalDateConverter.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "database.db"; //TODO magic
@@ -24,10 +28,11 @@ public abstract class AppRoomDatabase extends RoomDatabase {
     private static AppRoomDatabase create(final Context context) {
         return Room.databaseBuilder(context, AppRoomDatabase.class, DB_NAME)
                 .allowMainThreadQueries() //MAYBE mal anstaendig machen
+                .fallbackToDestructiveMigration() //TODO mal anstarndig machen
                 .build();
     }
 
-
     public abstract ConfigDao configDao();
+    public abstract TripDao tripDao();
 
 }

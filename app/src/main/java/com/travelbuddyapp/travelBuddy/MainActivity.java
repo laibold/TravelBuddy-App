@@ -23,6 +23,7 @@ import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,12 +31,11 @@ public class MainActivity extends AppCompatActivity
     ListView travelListView;
     TravelListAdapter travelListAdapter;
 
-    ArrayList<Trip> trips= new ArrayList<>();
     TripManager tripManager = new TripManager();
 
-    Trip selectedTrip; //TODO zuletzt gewaehlten in JSON festhalten
     int createTripReqCode;
     AppRoomDatabase database;
+    ArrayList<Trip> allTrips;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
         setSupportActionBar(toolbar);
-        createTripReqCode = getResources().getInteger(R.integer.createTrip);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,8 +51,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        database = AppRoomDatabase.getInstance(getApplicationContext());
+        createTripReqCode = getResources().getInteger(R.integer.createTrip);
 
+        database = AppRoomDatabase.getInstance(getApplicationContext());
         Config config = new Config();
 
         if(database.configDao().countEntries() == 0){
@@ -62,13 +61,22 @@ public class MainActivity extends AppCompatActivity
         }
 
         /////Prototype
-        tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
-        tripManager.addTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
-        tripManager.addTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
-        tripManager.addTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
+        //tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
+        //tripManager.addTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
+        //tripManager.addTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
+        //tripManager.addTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
         ////
+        //travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
 
-        travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
+        database.tripDao().clear();
+        database.tripDao().insertTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
+        database.tripDao().insertTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
+        database.tripDao().insertTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
+        database.tripDao().insertTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
+
+        allTrips = new ArrayList<>(database.tripDao().getTrips());
+
+        travelListAdapter = new TravelListAdapter(this, allTrips);
         travelListView = findViewById(R.id.content_main_trips_list);
         travelListView.setAdapter(travelListAdapter);
 
@@ -119,7 +127,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onTripSelected(int position){
-        selectedTrip = travelListAdapter.getItem(position);
         //config setzen
         database.configDao().setCurrentTrip(position);
     }
@@ -129,7 +136,10 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == createTripReqCode) {
             if (resultCode == RESULT_OK) {
                 Trip newTrip = data.getParcelableExtra("newTrip");
-                tripManager.addTrip(newTrip);
+                //tripManager.addTrip(newTrip);
+                database.tripDao().insertTrip(newTrip);
+                allTrips.add(newTrip); //TODO hier anstaendig, wahrscheinlich LiveData?
+
                 travelListAdapter.notifyDataSetChanged();
             }
         }

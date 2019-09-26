@@ -11,14 +11,14 @@ public class Config {
     private int id;
 
     @ColumnInfo
-    private int currentTrip;
+    private int currentTripId;
 
-    public int getCurrentTrip() {
-        return currentTrip;
+    public int getCurrentTripId() {
+        return currentTripId;
     }
 
-    public void setCurrentTrip(int currentTrip) {
-        this.currentTrip = currentTrip;
+    public void setCurrentTripId(int currentTripId) {
+        this.currentTripId = currentTripId;
     }
 
     public int getId(){
