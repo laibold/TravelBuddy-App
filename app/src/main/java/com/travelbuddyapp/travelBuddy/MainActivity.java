@@ -11,13 +11,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.travelbuddyapp.travelBuddy.business.TripManager;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
+import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,8 @@ public class MainActivity extends AppCompatActivity
     TripManager tripManager = new TripManager();
 
     Trip selectedTrip; //TODO zuletzt gewaehlten in JSON festhalten
-    int createTripReqCode = getResources().getInteger(R.integer.createTrip);
+    int createTripReqCode;
+    AppRoomDatabase database;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
         setSupportActionBar(toolbar);
-
+        createTripReqCode = getResources().getInteger(R.integer.createTrip);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -48,6 +52,14 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        database = AppRoomDatabase.getInstance(getApplicationContext());
+
+        Config config = new Config();
+
+        if(database.configDao().countEntries() == 0){
+            database.configDao().insertConfig(config); //das darf halt nur ein mal passieren
+        }
 
         /////Prototype
         tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
@@ -60,10 +72,12 @@ public class MainActivity extends AppCompatActivity
         travelListView = findViewById(R.id.content_main_trips_list);
         travelListView.setAdapter(travelListAdapter);
 
+        travelListView.setItemChecked(database.configDao().getCurrentTrip(), true);
+
         travelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedTrip = travelListAdapter.getItem(position);
+                onTripSelected(position);
             }
         });
     }
@@ -104,8 +118,10 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(new Intent(MainActivity.this, CreateTripActivity.class), createTripReqCode);
     }
 
-    public void onTripSelected(){
-        //this.selectedTrip =
+    public void onTripSelected(int position){
+        selectedTrip = travelListAdapter.getItem(position);
+        //config setzen
+        database.configDao().setCurrentTrip(position);
     }
 
     //Result from createTrip
