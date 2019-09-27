@@ -1,6 +1,7 @@
 package com.travelbuddyapp.travelBuddy;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -14,7 +15,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.travelbuddyapp.travelBuddy.business.TripManager;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
@@ -69,10 +72,6 @@ public class MainActivity extends AppCompatActivity
         //travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
 
         database.tripDao().clear();
-        database.tripDao().insertTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
-        database.tripDao().insertTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
-        database.tripDao().insertTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
-        database.tripDao().insertTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
 
         allTrips = new ArrayList<>(database.tripDao().getTrips());
 
@@ -129,6 +128,28 @@ public class MainActivity extends AppCompatActivity
     public void onTripSelected(int position){
         //config setzen
         database.configDao().setCurrentTrip(position);
+
+        TextView textView = findViewById(R.id.nav_header_main_header_text);
+        textView.setText(allTrips.get(position).getName());
+
+        ImageView imgView = findViewById(R.id.nav_header_main_bgimage);
+        imgView.setImageResource(allTrips.get(position).getImageResource());
+    }
+
+    public void onExamplesPressed(View v){
+        Trip thailand = new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand);
+        Trip vietbotschkok = new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam);
+        Trip portugal = new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal);
+        Trip uganda = new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda);
+
+        database.tripDao().insertTrip(thailand);
+        database.tripDao().insertTrip(vietbotschkok);
+        database.tripDao().insertTrip(portugal);
+        database.tripDao().insertTrip(uganda);
+
+        syncAllTrips();
+
+        travelListAdapter.notifyDataSetChanged();
     }
 
     //Result from createTrip
@@ -138,7 +159,7 @@ public class MainActivity extends AppCompatActivity
                 Trip newTrip = data.getParcelableExtra("newTrip");
                 //tripManager.addTrip(newTrip);
                 database.tripDao().insertTrip(newTrip);
-                allTrips.add(newTrip); //TODO hier anstaendig, wahrscheinlich LiveData?
+                syncAllTrips(); //TODO hier anstaendig, wahrscheinlich LiveData?
 
                 travelListAdapter.notifyDataSetChanged();
             }
@@ -168,5 +189,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void syncAllTrips(){
+        ArrayList<Trip> arrayList = new ArrayList<>(database.tripDao().getTrips());
+        allTrips.clear();
+        allTrips.addAll(arrayList);
     }
 }

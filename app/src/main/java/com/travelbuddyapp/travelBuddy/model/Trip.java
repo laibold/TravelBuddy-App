@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
  */
 @Entity
 public class Trip implements Parcelable {
+	@ColumnInfo
 	@PrimaryKey(autoGenerate = true)
 	private int id;
 
