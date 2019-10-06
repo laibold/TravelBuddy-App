@@ -1,5 +1,6 @@
 package com.travelbuddyapp.travelBuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,12 +19,14 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.travelbuddyapp.travelBuddy.business.TripManager;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.stop.AllStopsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,16 +65,6 @@ public class MainActivity extends AppCompatActivity
         if(database.configDao().countEntries() == 0){
             database.configDao().insertConfig(config); //das darf halt nur ein mal passieren
         }
-
-        /////Prototype
-        //tripManager.addTrip(new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand));
-        //tripManager.addTrip(new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam));
-        //tripManager.addTrip(new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal));
-        //tripManager.addTrip(new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda));
-        ////
-        //travelListAdapter = new TravelListAdapter(this, tripManager.getTripList());
-
-        database.tripDao().clear();
 
         allTrips = new ArrayList<>(database.tripDao().getTrips());
 
@@ -136,6 +129,11 @@ public class MainActivity extends AppCompatActivity
         imgView.setImageResource(allTrips.get(position).getImageResource());
     }
 
+    public void onResetPressed(View v){
+        database.tripDao().clear();
+        syncAllTrips();
+    }
+
     public void onExamplesPressed(View v){
         Trip thailand = new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand);
         Trip vietbotschkok = new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam);
@@ -148,8 +146,6 @@ public class MainActivity extends AppCompatActivity
         database.tripDao().insertTrip(uganda);
 
         syncAllTrips();
-
-        travelListAdapter.notifyDataSetChanged();
     }
 
     //Result from createTrip
@@ -159,32 +155,36 @@ public class MainActivity extends AppCompatActivity
                 Trip newTrip = data.getParcelableExtra("newTrip");
                 //tripManager.addTrip(newTrip);
                 database.tripDao().insertTrip(newTrip);
-                syncAllTrips(); //TODO hier anstaendig, wahrscheinlich LiveData?
-
-                travelListAdapter.notifyDataSetChanged();
+                syncAllTrips();
             }
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Context context = getApplicationContext();
+        CharSequence text = "selected";
+        int duration = Toast.LENGTH_SHORT;
+
         if (id == R.id.nav_travels) {
-            // Handle the camera action
-        } else if (id == R.id.nav_travels) {
-
+            text = "travels";
         } else if (id == R.id.nav_stops) {
-
+            //TODO
+            text = "stops";
+            startActivity(new Intent(MainActivity.this, AllStopsActivity.class));
         } else if (id == R.id.nav_diary) {
-
+            text = "diary";
         } else if (id == R.id.nav_documents) {
-
+            text = "documents";
         } else if (id == R.id.nav_finances) {
-
+            text = "finances";
         }
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -192,8 +192,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void syncAllTrips(){
+        //TODO hier anstaendig, wahrscheinlich LiveData?
         ArrayList<Trip> arrayList = new ArrayList<>(database.tripDao().getTrips());
         allTrips.clear();
         allTrips.addAll(arrayList);
+        travelListAdapter.notifyDataSetChanged();
     }
 }

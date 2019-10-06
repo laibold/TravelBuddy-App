@@ -5,7 +5,7 @@
     <string name="nav_header_title">Thailand</string>
     <string name="nav_header_subtitle">Marvin</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Einstellungen</string>
+    <string name="settings">Einstellungen</string>
 
     <string name="menu_travels">Reisen</string>
     <string name="menu_stops">Stops</string>
@@ -30,6 +30,53 @@
         <item>Fesitval</item>
         <item>Camping-Urlaub</item>
         <item>Andere</item>
+    </string-array>
+
+    <string-array name="stop_salutations">
+        <item>Hallo ihr Lieben,</item>
+        <item>Hallihallo,</item>
+        <item>Guten Tacho,</item>
+        <item>Hallöchen,</item>
+        <item>Tachchen,</item>
+        <item>Hallo ihr Nutten,</item>
+        <item>Hallo ihr Süßis,</item>
+        <item>Hallo ihr Schweinebacken,</item>
+        <item>Howdy Freunde,</item>
+        <item>Gude,</item>
+        <item>Moin Moin,</item>
+        <item>Grüß Gott,</item>
+        <item>Serwuss Erdnuss,</item>
+    </string-array>
+
+    <string-array name="stop_arrivals">
+        <item>bin gerade in $stop angekommen.</item>
+        <item>wir sind gleich in $stop.</item>
+        <item>gleich erreichen wir $stop.</item>
+        <item>$stop ist schon in Sichtweite.</item>
+        <item>nicht mehr weit bis $stop.</item>
+        <item>ich melde mich aus $stop.</item>
+        <item>$stop ist wirklich sehr schön.</item>
+        <item>$stop ist bis jetzt der Höhepunkt.</item>
+        <item>$stop ist unfassbar schön.</item>
+        <item>$stop besticht durch ihre dominante Schönheit.</item>
+        <item>$stop ist meine Herrin und ich werde $stop bis an mein Lebensende dienen.</item>
+        <item>es ist so schön in $stop. Ich glaube, ich bleibe bis an mein Lebensende hier.</item>
+    </string-array>
+
+    <string-array name="stop_closings">
+        <item>Bis Denver!</item>
+        <item>Bis Baldrian!</item>
+        <item>Melde mich!</item>
+        <item>Tschau Kakau.</item>
+        <item>Schreibe euch dann später.</item>
+        <item>Freue mich schon.</item>
+        <item>Bis Spätersile.</item>
+        <item>Machts gut, ihr Nutten.</item>
+        <item>Tschüssli Müsli.</item>
+        <item>Bleibt sauber.</item>
+        <item>San Frantschüssco.</item>
+        <item>Lasst die Finger von harten Drogen.</item>
+        <item>Halt die Ohren steif, du Aff!</item>
     </string-array>
 
 </resources>
