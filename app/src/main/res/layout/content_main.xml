@@ -17,7 +17,10 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="50dp"
         android:choiceMode="singleChoice"
-        android:listSelector="@color/colorPrimary">
+        >
+
+        android:onClick="onTripSelected"
+
     </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,5 +35,29 @@
         app:backgroundTint="#FCFBFB"
         app:srcCompat="@android:drawable/ic_input_add"
         android:onClick="onNewTripPressed"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|start"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Beispiele"
+        android:onClick="onExamplesPressed"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="120dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="bottom|start"
+        android:text="Reset"
+        android:onClick="onResetPressed"/>
 
 </RelativeLayout>

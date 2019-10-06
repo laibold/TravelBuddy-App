@@ -3,24 +3,41 @@ package com.travelbuddyapp.travelBuddy.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.travelbuddyapp.travelBuddy.R;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Travels contain a UserList and a financesManager
+ * Trips contain a UserList and a financesManager
  * @author Marvin
  *
  */
+@Entity
 public class Trip implements Parcelable {
+	@ColumnInfo
+	@PrimaryKey(autoGenerate = true)
+	private int id;
+
+	@ColumnInfo
 	private String name;
+
 	//private UserList userList;
+
+	@ColumnInfo
 	private LocalDate startDate;
+
+	@ColumnInfo
 	private LocalDate endDate;
+
 	//private FinancesManager financesMgr = new FinancesManager();
 	//private StopManager stopMgr = new StopManager();
+
+	@ColumnInfo
 	private int imageResource;
 
 	/**
@@ -41,7 +58,18 @@ public class Trip implements Parcelable {
 
 		this.imageResource = imageResource;
 	}
-	
+
+	public Trip(){
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	/*public FinancesManager getFinancesManager() {
 		return this.financesMgr;
 	}*/
@@ -118,10 +146,11 @@ public class Trip implements Parcelable {
 		return imageResource;
 	}
 
-
+	public void setImageResource(int imageResource) {
+		this.imageResource = imageResource;
+	}
 
 	//Parcel-Shit
-
 	protected Trip(Parcel in) {
 		name = in.readString();
 		startDate = (LocalDate) in.readValue(LocalDate.class.getClassLoader());
