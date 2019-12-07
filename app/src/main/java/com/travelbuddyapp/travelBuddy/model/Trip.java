@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 
 import java.time.LocalDate;
 import java.time.Period;

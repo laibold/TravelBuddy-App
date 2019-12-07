@@ -69,15 +69,15 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
     public void next(View v){
         boolean haserrors = false;
         if( TextUtils.isEmpty(tripNameTextView.getText())) {
-            tripNameTextView.setError("Bitte Namen eingeben!");
+            tripNameTextView.setError(getResources().getString(R.string.error_entername));
             haserrors = true;
         }
         if( TextUtils.isEmpty(startDateTextView.getText())) {
-            startDateTextView.setError("Bitte Datum eingeben!");
+            startDateTextView.setError(getResources().getString(R.string.error_enterdate));
             haserrors = true;
         }
         if( TextUtils.isEmpty(endDateTextView.getText())) {
-            endDateTextView.setError("Bitte Datum eingeben!");
+            endDateTextView.setError(getResources().getString(R.string.error_enterdate));
             haserrors = true;
         }
 

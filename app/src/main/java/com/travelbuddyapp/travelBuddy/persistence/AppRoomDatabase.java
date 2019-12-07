@@ -9,9 +9,10 @@ import androidx.room.TypeConverters;
 
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.LocalDateConverter;
+import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 
-@Database(entities = {Config.class, Trip.class}, version = 4)//, exportSchema = false)
+@Database(entities = {Config.class, Trip.class, Stop.class}, version = 5)//, exportSchema = false)
 @TypeConverters({LocalDateConverter.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
@@ -34,5 +35,6 @@ public abstract class AppRoomDatabase extends RoomDatabase {
 
     public abstract ConfigDao configDao();
     public abstract TripDao tripDao();
+    public abstract StopDao stopDao();
 
 }

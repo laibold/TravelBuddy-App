@@ -2,7 +2,6 @@ package com.travelbuddyapp.travelBuddy;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -21,23 +20,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.travelbuddyapp.travelBuddy.business.TripManager;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
+import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 import com.travelbuddyapp.travelBuddy.stop.AllStopsActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView travelListView;
     TravelListAdapter travelListAdapter;
-
-    TripManager tripManager = new TripManager();
 
     int createTripReqCode;
     AppRoomDatabase database;
@@ -49,8 +45,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
+        NavigationView navigationView = findViewById(R.id.nav_view_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -161,9 +157,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int id = menuItem.getItemId();
 
         Context context = getApplicationContext();
         CharSequence text = "selected";
@@ -173,10 +169,11 @@ public class MainActivity extends AppCompatActivity
             text = "travels";
         } else if (id == R.id.nav_stops) {
             //TODO
-            text = "stops";
+            text = "content_stops";
             startActivity(new Intent(MainActivity.this, AllStopsActivity.class));
         } else if (id == R.id.nav_diary) {
             text = "diary";
+            startActivity(new Intent(MainActivity.this, DebugActivity.class));
         } else if (id == R.id.nav_documents) {
             text = "documents";
         } else if (id == R.id.nav_finances) {
@@ -186,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

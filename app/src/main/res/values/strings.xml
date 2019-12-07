@@ -22,6 +22,11 @@
     <string name="createTrip_until">bis</string>
     <string name="createTrip_endDate_hint">End-Datum</string>
 
+    <string name="createStop_InfoTitle">Neuer Stop</string>
+    <string name="createStop_name_hint">Name</string>
+
+    <string name="error_entername">Bitte Namen angeben!</string>
+    <string name="error_enterdate">Bitte Datum angeben!</string>
 
     <string-array name="kind_of_travel">
         <item>Hotelreise</item>
@@ -46,6 +51,7 @@
         <item>Moin Moin,</item>
         <item>Grüß Gott,</item>
         <item>Serwuss Erdnuss,</item>
+        <item>Bongiorno John Porno,</item>
     </string-array>
 
     <string-array name="stop_arrivals">
@@ -77,6 +83,7 @@
         <item>San Frantschüssco.</item>
         <item>Lasst die Finger von harten Drogen.</item>
         <item>Halt die Ohren steif, du Aff!</item>
+        <item>Gruß und Kuss!</item>
     </string-array>
 
 </resources>

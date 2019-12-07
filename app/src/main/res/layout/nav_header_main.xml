@@ -39,15 +39,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         >
 
-        <!--ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_vertical"
-            android:contentDescription="@string/nav_header_desc"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            app:srcCompat="@drawable/traveller_icon" /-->
-
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"
             android:layout_height="50dp"
