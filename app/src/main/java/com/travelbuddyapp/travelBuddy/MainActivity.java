@@ -3,23 +3,22 @@ package com.travelbuddyapp.travelBuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
 import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
@@ -32,8 +31,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView travelListView;
-    TravelListAdapter travelListAdapter;
+    ListView tripListView;
+    TripListAdapter tripListAdapter;
 
     int createTripReqCode;
     AppRoomDatabase database;
@@ -64,13 +63,13 @@ public class MainActivity extends AppCompatActivity
 
         allTrips = new ArrayList<>(database.tripDao().getTrips());
 
-        travelListAdapter = new TravelListAdapter(this, allTrips);
-        travelListView = findViewById(R.id.content_main_trips_list);
-        travelListView.setAdapter(travelListAdapter);
+        tripListAdapter = new TripListAdapter(this, allTrips);
+        tripListView = findViewById(R.id.content_main_trips_list);
+        tripListView.setAdapter(tripListAdapter);
 
-        travelListView.setItemChecked(database.configDao().getCurrentTrip(), true);
+        tripListView.setItemChecked(database.configDao().getCurrentTrip(), true);
 
-        travelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 onTripSelected(position);
@@ -115,14 +114,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onTripSelected(int position){
+        int databaseID = allTrips.get(position).getId();
+        Trip selectedTrip = database.tripDao().getTrip(databaseID);
+
+        System.out.println("Position: " + position);
+
+        System.out.println("DatabaseID: " + databaseID);
+
         //config setzen
-        database.configDao().setCurrentTrip(position);
+        database.configDao().setCurrentTrip(databaseID);
 
         TextView textView = findViewById(R.id.nav_header_main_header_text);
-        textView.setText(allTrips.get(position).getName());
+        textView.setText(selectedTrip.getName());
 
         ImageView imgView = findViewById(R.id.nav_header_main_bgimage);
-        imgView.setImageResource(allTrips.get(position).getImageResource());
+        imgView.setImageResource(selectedTrip.getImageResource());
     }
 
     public void onResetPressed(View v){
@@ -165,8 +171,8 @@ public class MainActivity extends AppCompatActivity
         CharSequence text = "selected";
         int duration = Toast.LENGTH_SHORT;
 
-        if (id == R.id.nav_travels) {
-            text = "travels";
+        if (id == R.id.nav_trips) {
+            text = "trips";
         } else if (id == R.id.nav_stops) {
             //TODO
             text = "content_stops";
@@ -193,6 +199,13 @@ public class MainActivity extends AppCompatActivity
         ArrayList<Trip> arrayList = new ArrayList<>(database.tripDao().getTrips());
         allTrips.clear();
         allTrips.addAll(arrayList);
-        travelListAdapter.notifyDataSetChanged();
+        tripListAdapter.notifyDataSetChanged();
+    }
+
+    private void showToast(CharSequence text){
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }

@@ -6,19 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
     android:orientation="horizontal"
-    android:background="@drawable/travellistview_selector"
+    android:background="@drawable/triplistview_selector"
     >
 
     <androidx.cardview.widget.CardView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:elevation="12dp"
-        android:id="@+id/createTrip_travelicon_cardView"
+        android:id="@+id/createTrip_tripicon_cardView"
         app:cardCornerRadius="25dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp">
         <ImageView
-            android:id="@+id/createTrip_travelicon_image"
+            android:id="@+id/createTrip_tripicon_image"
             android:layout_width="match_parent"
             android:layout_height="50dp"
         />
@@ -34,7 +34,7 @@
         >
 
         <TextView
-            android:id="@+id/traveltitle"
+            android:id="@+id/triptitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -47,7 +47,7 @@
             />
 
         <TextView
-            android:id="@+id/travelsubtitle"
+            android:id="@+id/tripsubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

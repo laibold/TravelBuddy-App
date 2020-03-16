@@ -12,7 +12,7 @@ import com.travelbuddyapp.travelBuddy.model.LocalDateConverter;
 import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 
-@Database(entities = {Config.class, Trip.class, Stop.class}, version = 5)//, exportSchema = false)
+@Database(entities = {Config.class, Trip.class, Stop.class}, version = 5, exportSchema = false)
 @TypeConverters({LocalDateConverter.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
@@ -29,7 +29,7 @@ public abstract class AppRoomDatabase extends RoomDatabase {
     private static AppRoomDatabase create(final Context context) {
         return Room.databaseBuilder(context, AppRoomDatabase.class, DB_NAME)
                 .allowMainThreadQueries() //MAYBE mal anstaendig machen
-                .fallbackToDestructiveMigration() //TODO mal anstarndig machen
+                .fallbackToDestructiveMigration() //TODO mal anstaendig machen
                 .build();
     }
 

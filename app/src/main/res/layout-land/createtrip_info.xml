@@ -43,7 +43,7 @@
         android:paddingRight="30dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/createTrip_travelicon_cardView"
+            android:id="@+id/createTrip_tripicon_cardView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="false"
@@ -53,7 +53,7 @@
             app:cardCornerRadius="75dp">
 
             <ImageView
-                android:id="@+id/createTrip_travelicon_image"
+                android:id="@+id/createTrip_tripicon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/createTrip_image_description"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_toEndOf="@id/createTrip_travelicon_cardView"
+            android:layout_toEndOf="@id/createTrip_tripicon_cardView"
             android:hint="@string/createTrip_name_hint"
             android:imeOptions="actionDone"
             android:inputType="text"
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/createTrip_tripName_text"
             android:layout_marginBottom="20dp"
-            android:layout_toEndOf="@id/createTrip_travelicon_cardView" />
+            android:layout_toEndOf="@id/createTrip_tripicon_cardView" />
 
 
         <EditText
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/createTrip_kindOfTrip_spinner"
-            android:layout_toEndOf="@id/createTrip_travelicon_cardView"
+            android:layout_toEndOf="@id/createTrip_tripicon_cardView"
             android:clickable="true"
             android:focusable="false"
             android:hint="@string/createTrip_startDate_hint"

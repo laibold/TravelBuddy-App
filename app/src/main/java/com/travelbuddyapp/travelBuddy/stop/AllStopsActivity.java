@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -45,12 +44,12 @@ public class AllStopsActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout_stops);
-        NavigationView navigationView = findViewById(R.id.nav_view_stops);
+        /*NavigationView navigationView = findViewById(R.id.nav_view_stops);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);*/
 
         createStopReqCode = getResources().getInteger(R.integer.createStop);
 
@@ -79,8 +78,8 @@ public class AllStopsActivity extends AppCompatActivity
         CharSequence text = "selected";
         int duration = Toast.LENGTH_SHORT;
 
-        if (id == R.id.nav_travels) {
-            text = "travels";
+        if (id == R.id.nav_trips) {
+            text = "trips";
             startActivity(new Intent(AllStopsActivity.this, MainActivity.class));
         } else if (id == R.id.nav_stops) {
 
@@ -125,8 +124,6 @@ public class AllStopsActivity extends AppCompatActivity
                 Stop newStop = data.getParcelableExtra("newStop");
                 newStop.setTripId(currentTripId);
                 database.stopDao().insertStop(newStop);
-
-                ArrayList<Stop> test = new ArrayList<>(database.stopDao().getAllStops()) ;
 
                 syncAllStops();
             }

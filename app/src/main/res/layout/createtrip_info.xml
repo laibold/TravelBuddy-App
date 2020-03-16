@@ -43,7 +43,7 @@
         android:paddingRight="30dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/createTrip_travelicon_cardView"
+            android:id="@+id/createTrip_tripicon_cardView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
@@ -53,7 +53,7 @@
             app:cardCornerRadius="75dp">
 
             <ImageView
-                android:id="@+id/createTrip_travelicon_image"
+                android:id="@+id/createTrip_tripicon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/createTrip_image_description"
@@ -64,7 +64,7 @@
             android:id="@+id/createTrip_tripName_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/createTrip_travelicon_cardView"
+            android:layout_below="@id/createTrip_tripicon_cardView"
             android:layout_marginBottom="20dp"
             android:hint="@string/createTrip_name_hint"
             android:imeOptions="actionDone"

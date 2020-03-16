@@ -51,7 +51,7 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
 
     private void setSpinner(){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.kind_of_travel, android.R.layout.simple_spinner_item);
+                this, R.array.kind_of_trip, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         kindOfTripSpinner.setAdapter(adapter);
     }
