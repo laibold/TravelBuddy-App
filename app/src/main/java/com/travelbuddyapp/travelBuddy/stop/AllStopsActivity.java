@@ -7,10 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -21,6 +24,7 @@ import com.travelbuddyapp.travelBuddy.MainActivity;
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.model.Stop;
+import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
 import java.util.ArrayList;
@@ -41,15 +45,20 @@ public class AllStopsActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stops);
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
+
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_stops);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout_stops);
-        /*NavigationView navigationView = findViewById(R.id.nav_view_stops);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);*/
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         createStopReqCode = getResources().getInteger(R.integer.createStop);
 
@@ -60,6 +69,7 @@ public class AllStopsActivity extends AppCompatActivity
         stopListView.setAdapter(stopListAdapter);
 
         syncAllStops();
+        setDrawerData();
 
         stopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,6 +77,22 @@ public class AllStopsActivity extends AppCompatActivity
                 onStopSelected(position);
             }
         });
+    }
+
+    private void setDrawerData(){
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+
+        int currentTripID = database.configDao().getCurrentTrip();
+        Trip selectedTrip = database.tripDao().getTrip(currentTripID);
+
+        if(selectedTrip != null) {
+            TextView textView = hView.findViewById(R.id.nav_header_main_header_text);
+            textView.setText(selectedTrip.getName());
+
+            ImageView imgView = hView.findViewById(R.id.nav_header_main_bgimage);
+            imgView.setImageResource(selectedTrip.getImageResource());
+        }
     }
 
     @Override

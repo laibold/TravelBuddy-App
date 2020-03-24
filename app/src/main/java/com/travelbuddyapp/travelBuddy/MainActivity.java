@@ -42,14 +42,19 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar);
+
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_main);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
-        NavigationView navigationView = findViewById(R.id.nav_view_main);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
         navigationView.setNavigationItemSelectedListener(this);
 
         createTripReqCode = getResources().getInteger(R.integer.createTrip);
@@ -75,6 +80,24 @@ public class MainActivity extends AppCompatActivity
                 onTripSelected(position);
             }
         });
+
+        setDrawerData();
+    }
+
+    private void setDrawerData(){
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+
+        int currentTripID = database.configDao().getCurrentTrip();
+        Trip selectedTrip = database.tripDao().getTrip(currentTripID);
+
+        if(selectedTrip != null) {
+            TextView textView = hView.findViewById(R.id.nav_header_main_header_text);
+            textView.setText(selectedTrip.getName());
+
+            ImageView imgView = hView.findViewById(R.id.nav_header_main_bgimage);
+            imgView.setImageResource(selectedTrip.getImageResource());
+        }
     }
 
     @Override
@@ -115,25 +138,17 @@ public class MainActivity extends AppCompatActivity
 
     public void onTripSelected(int position){
         int databaseID = allTrips.get(position).getId();
-        Trip selectedTrip = database.tripDao().getTrip(databaseID);
-
-        System.out.println("Position: " + position);
-
-        System.out.println("DatabaseID: " + databaseID);
 
         //config setzen
         database.configDao().setCurrentTrip(databaseID);
 
-        TextView textView = findViewById(R.id.nav_header_main_header_text);
-        textView.setText(selectedTrip.getName());
-
-        ImageView imgView = findViewById(R.id.nav_header_main_bgimage);
-        imgView.setImageResource(selectedTrip.getImageResource());
+        setDrawerData();
     }
 
     public void onResetPressed(View v){
         database.tripDao().clear();
         syncAllTrips();
+        database.configDao().setCurrentTrip(-1);
     }
 
     public void onExamplesPressed(View v){
