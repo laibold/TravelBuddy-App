@@ -20,16 +20,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
-import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
-import com.travelbuddyapp.travelBuddy.stop.AllStopsActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     ListView tripListView;
     TripListAdapter tripListAdapter;
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     int createTripReqCode;
     AppRoomDatabase database;
     ArrayList<Trip> allTrips;
+    private NavigationItemSelectedListener navigationItemSelectedListener;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,7 +53,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationItemSelectedListener = new NavigationItemSelectedListener(this, drawer);
+
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
 
         createTripReqCode = getResources().getInteger(R.integer.createTrip);
 
@@ -175,38 +175,6 @@ public class MainActivity extends AppCompatActivity
                 syncAllTrips();
             }
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        // Handle navigation view item clicks here.
-        int id = menuItem.getItemId();
-
-        Context context = getApplicationContext();
-        CharSequence text = "selected";
-        int duration = Toast.LENGTH_SHORT;
-
-        if (id == R.id.nav_trips) {
-            text = "trips";
-        } else if (id == R.id.nav_stops) {
-            //TODO
-            text = "content_stops";
-            startActivity(new Intent(MainActivity.this, AllStopsActivity.class));
-        } else if (id == R.id.nav_diary) {
-            text = "diary";
-            startActivity(new Intent(MainActivity.this, DebugActivity.class));
-        } else if (id == R.id.nav_documents) {
-            text = "documents";
-        } else if (id == R.id.nav_finances) {
-            text = "finances";
-        }
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void syncAllTrips(){

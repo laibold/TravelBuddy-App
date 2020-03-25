@@ -3,7 +3,6 @@ package com.travelbuddyapp.travelBuddy.stop;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,34 +11,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.MainActivity;
+import com.travelbuddyapp.travelBuddy.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
 import java.util.ArrayList;
 
-public class AllStopsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class AllStopsActivity extends AppCompatActivity {
 
     private int createStopReqCode;
-    AppRoomDatabase database;
+    private AppRoomDatabase database;
 
-    ListView stopListView;
-    ArrayList<Stop> allStops = new ArrayList<>();
-    StopListAdapter stopListAdapter;
+    private ListView stopListView;
+    private ArrayList<Stop> allStops = new ArrayList<>();
+    private StopListAdapter stopListAdapter;
 
-    Stop currentStop;
+    private Stop currentStop;
+    private NavigationItemSelectedListener navigationItemSelectedListener;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -58,7 +54,9 @@ public class AllStopsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationItemSelectedListener = new NavigationItemSelectedListener(AllStopsActivity.this, drawer);
+
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
 
         createStopReqCode = getResources().getInteger(R.integer.createStop);
 
@@ -93,37 +91,6 @@ public class AllStopsActivity extends AppCompatActivity
             ImageView imgView = hView.findViewById(R.id.nav_header_main_bgimage);
             imgView.setImageResource(selectedTrip.getImageResource());
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        // Handle navigation view item clicks here.
-        int id = menuItem.getItemId();
-
-        Context context = getApplicationContext();
-        CharSequence text = "selected";
-        int duration = Toast.LENGTH_SHORT;
-
-        if (id == R.id.nav_trips) {
-            text = "trips";
-            startActivity(new Intent(AllStopsActivity.this, MainActivity.class));
-        } else if (id == R.id.nav_stops) {
-
-        } else if (id == R.id.nav_diary) {
-            text = "diary";
-            startActivity(new Intent(AllStopsActivity.this, DebugActivity.class));
-        } else if (id == R.id.nav_documents) {
-            text = "documents";
-        } else if (id == R.id.nav_finances) {
-            text = "finances";
-        }
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_stops);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override
