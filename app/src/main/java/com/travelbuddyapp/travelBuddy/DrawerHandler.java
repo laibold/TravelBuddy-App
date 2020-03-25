@@ -10,23 +10,18 @@ import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
-public class DrawerHandler extends AppCompatActivity {
+public class DrawerHandler {
     private static DrawerHandler instance;
     private AppRoomDatabase database;
+    private AppCompatActivity activity;
 
-    private DrawerHandler(){
-        database = AppRoomDatabase.getInstance(getApplicationContext());
+    public DrawerHandler(AppCompatActivity activity){
+        this.activity = activity;
+        database = AppRoomDatabase.getInstance(activity.getApplicationContext());
     }
 
-    public static DrawerHandler getInstance(){
-        if (DrawerHandler.instance == null){
-            DrawerHandler.instance = new DrawerHandler();
-        }
-        return instance;
-    }
-
-    private void setDrawerData(){
-        NavigationView navigationView = findViewById(R.id.nav_view);
+    public void setDrawerData(){
+        NavigationView navigationView = activity.findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
 
         int currentTripID = database.configDao().getCurrentTrip();

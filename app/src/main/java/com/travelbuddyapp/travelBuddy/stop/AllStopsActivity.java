@@ -6,21 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.travelbuddyapp.travelBuddy.DrawerHandler;
 import com.travelbuddyapp.travelBuddy.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
-import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ public class AllStopsActivity extends AppCompatActivity {
     private ListView stopListView;
     private ArrayList<Stop> allStops = new ArrayList<>();
     private StopListAdapter stopListAdapter;
+    DrawerLayout drawer;
 
     private Stop currentStop;
     private NavigationItemSelectedListener navigationItemSelectedListener;
@@ -44,7 +44,7 @@ public class AllStopsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_stops);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_stops);
+        drawer = findViewById(R.id.drawer_layout_stops);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -67,7 +67,9 @@ public class AllStopsActivity extends AppCompatActivity {
         stopListView.setAdapter(stopListAdapter);
 
         syncAllStops();
-        setDrawerData();
+        //setDrawerData();
+
+        new DrawerHandler(this).setDrawerData();
 
         stopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,22 +77,6 @@ public class AllStopsActivity extends AppCompatActivity {
                 onStopSelected(position);
             }
         });
-    }
-
-    private void setDrawerData(){
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
-
-        int currentTripID = database.configDao().getCurrentTrip();
-        Trip selectedTrip = database.tripDao().getTrip(currentTripID);
-
-        if(selectedTrip != null) {
-            TextView textView = hView.findViewById(R.id.nav_header_main_header_text);
-            textView.setText(selectedTrip.getName());
-
-            ImageView imgView = hView.findViewById(R.id.nav_header_main_bgimage);
-            imgView.setImageResource(selectedTrip.getImageResource());
-        }
     }
 
     @Override
@@ -129,8 +115,16 @@ public class AllStopsActivity extends AppCompatActivity {
         whatsappBtn.setText(currentStop.getName() + " per Whatsapp teilen");
     }
 
-    public void onWhatsappPressed(View v){
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
+    public void onWhatsappPressed(View v){
         String[] salutations = getResources().getStringArray(R.array.stop_salutations);
         String[] arrivals = getResources().getStringArray(R.array.stop_arrivals);
         String[] closings = getResources().getStringArray(R.array.stop_closings);

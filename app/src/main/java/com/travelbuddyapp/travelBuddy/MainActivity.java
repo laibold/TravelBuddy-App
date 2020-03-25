@@ -1,16 +1,12 @@
 package com.travelbuddyapp.travelBuddy;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     AppRoomDatabase database;
     ArrayList<Trip> allTrips;
     private NavigationItemSelectedListener navigationItemSelectedListener;
+    DrawerLayout drawer;
+    private DrawerHandler drawerHandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_main);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
+        drawer = findViewById(R.id.drawer_layout_main);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,28 +79,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setDrawerData();
-    }
-
-    private void setDrawerData(){
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
-
-        int currentTripID = database.configDao().getCurrentTrip();
-        Trip selectedTrip = database.tripDao().getTrip(currentTripID);
-
-        if(selectedTrip != null) {
-            TextView textView = hView.findViewById(R.id.nav_header_main_header_text);
-            textView.setText(selectedTrip.getName());
-
-            ImageView imgView = hView.findViewById(R.id.nav_header_main_bgimage);
-            imgView.setImageResource(selectedTrip.getImageResource());
-        }
+        drawerHandler = new DrawerHandler(this);
+        drawerHandler.setDrawerData();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_main);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -138,11 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTripSelected(int position){
         int databaseID = allTrips.get(position).getId();
-
-        //config setzen
         database.configDao().setCurrentTrip(databaseID);
-
-        setDrawerData();
+        drawerHandler.setDrawerData();
     }
 
     public void onResetPressed(View v){
@@ -185,10 +164,4 @@ public class MainActivity extends AppCompatActivity {
         tripListAdapter.notifyDataSetChanged();
     }
 
-    private void showToast(CharSequence text){
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
 }
