@@ -26,14 +26,13 @@ import java.util.ArrayList;
 
 public class AllStopsActivity extends AppCompatActivity {
 
+    private StopListAdapter stopListAdapter;
+    private DrawerLayout drawer;
+    private ListView stopListView;
+
     private int createStopReqCode;
     private AppRoomDatabase database;
-
-    private ListView stopListView;
     private ArrayList<Stop> allStops = new ArrayList<>();
-    private StopListAdapter stopListAdapter;
-    DrawerLayout drawer;
-
     private Stop currentStop;
     private NavigationItemSelectedListener navigationItemSelectedListener;
 
@@ -42,34 +41,35 @@ public class AllStopsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stops);
 
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_stops);
-        setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout_stops);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationItemSelectedListener = new NavigationItemSelectedListener(AllStopsActivity.this, drawer);
-
-        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-
         createStopReqCode = getResources().getInteger(R.integer.createStop);
 
         database = AppRoomDatabase.getInstance(getApplicationContext());
 
+        configDrawerNavigation();
+        configStopList();
+
+        new DrawerHandler(this).setDrawerData();
+    }
+
+    private void configDrawerNavigation() {
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_stops);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout_stops);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationItemSelectedListener = new NavigationItemSelectedListener(AllStopsActivity.this, drawer);
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+    }
+
+    private void configStopList() {
         stopListAdapter = new StopListAdapter(this, allStops);
         stopListView = findViewById(R.id.content_stops_stops_list);
         stopListView.setAdapter(stopListAdapter);
-
         syncAllStops();
-        //setDrawerData();
-
-        new DrawerHandler(this).setDrawerData();
 
         stopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

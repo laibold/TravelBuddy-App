@@ -24,14 +24,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView tripListView;
-    TripListAdapter tripListAdapter;
+    private ListView tripListView;
+    private TripListAdapter tripListAdapter;
+    private DrawerLayout drawer;
 
-    int createTripReqCode;
-    AppRoomDatabase database;
-    ArrayList<Trip> allTrips;
+    private int createTripReqCode;
+    private AppRoomDatabase database;
+    private ArrayList<Trip> allTrips;
     private NavigationItemSelectedListener navigationItemSelectedListener;
-    DrawerLayout drawer;
     private DrawerHandler drawerHandler;
 
     @Override
@@ -39,48 +39,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_main);
-        setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout_main);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationItemSelectedListener = new NavigationItemSelectedListener(this, drawer);
-
-        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-
         createTripReqCode = getResources().getInteger(R.integer.createTrip);
 
         database = AppRoomDatabase.getInstance(getApplicationContext());
         Config config = new Config();
-
-        if(database.configDao().countEntries() == 0){
+        if (database.configDao().countEntries() == 0){
             database.configDao().insertConfig(config); //das darf halt nur ein mal passieren
         }
 
-        allTrips = new ArrayList<>(database.tripDao().getTrips());
+        configDrawerNavigation();
+        configTripList();
 
+        drawerHandler = new DrawerHandler(this);
+        drawerHandler.setDrawerData();
+    }
+
+    private void configDrawerNavigation() {
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_toolbar_main);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout_main);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationItemSelectedListener = new NavigationItemSelectedListener(this, drawer);
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+    }
+
+    private void configTripList() {
+        allTrips = new ArrayList<>(database.tripDao().getTrips());
         tripListAdapter = new TripListAdapter(this, allTrips);
         tripListView = findViewById(R.id.content_main_trips_list);
         tripListView.setAdapter(tripListAdapter);
-
         tripListView.setItemChecked(database.configDao().getCurrentTrip(), true);
-
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 onTripSelected(position);
             }
         });
-
-        drawerHandler = new DrawerHandler(this);
-        drawerHandler.setDrawerData();
     }
 
     @Override
