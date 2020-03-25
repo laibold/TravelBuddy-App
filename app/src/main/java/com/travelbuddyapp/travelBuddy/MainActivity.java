@@ -73,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
         tripListAdapter = new TripListAdapter(this, allTrips);
         tripListView = findViewById(R.id.content_main_trips_list);
         tripListView.setAdapter(tripListAdapter);
-        tripListView.setItemChecked(database.configDao().getCurrentTrip(), true);
+
+        int currentTripId = database.configDao().getCurrentTrip();
+        for (int i=0; i < allTrips.size(); i++){
+            if (allTrips.get(i).getId() == currentTripId) {
+                tripListView.setItemChecked(i, true);
+                break;
+            }
+        }
+
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
