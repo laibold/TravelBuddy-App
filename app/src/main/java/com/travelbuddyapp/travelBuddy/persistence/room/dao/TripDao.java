@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.persistence;
+package com.travelbuddyapp.travelBuddy.persistence.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -18,9 +18,6 @@ public interface TripDao {
 
     @Query("SELECT * FROM Trip WHERE id = :id")
     Trip getTrip(int id);
-
-    @Query("SELECT * from Trip where id = :id LIMIT 1")
-    Trip getTripById(int id);
 
     @Query("DELETE FROM Trip")
     void clear();

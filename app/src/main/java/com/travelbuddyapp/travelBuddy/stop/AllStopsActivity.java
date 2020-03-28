@@ -20,7 +20,7 @@ import com.travelbuddyapp.travelBuddy.DrawerHandler;
 import com.travelbuddyapp.travelBuddy.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
-import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 import java.util.ArrayList;
 
@@ -125,18 +125,22 @@ public class AllStopsActivity extends AppCompatActivity {
     }
 
     public void onWhatsappPressed(View v){
-        String[] salutations = getResources().getStringArray(R.array.stop_salutations);
-        String[] arrivals = getResources().getStringArray(R.array.stop_arrivals);
-        String[] closings = getResources().getStringArray(R.array.stop_closings);
+        if (currentStop == null){
+            Toast.makeText(getApplicationContext(), "Kein Stop ausgewählt", Toast.LENGTH_SHORT);
+        } else{
+            String[] salutations = getResources().getStringArray(R.array.stop_salutations);
+            String[] arrivals = getResources().getStringArray(R.array.stop_arrivals);
+            String[] closings = getResources().getStringArray(R.array.stop_closings);
 
-        String message = currentStop.generateMessage(salutations, arrivals, closings);
+            String message = currentStop.generateMessage(salutations, arrivals, closings);
 
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-        sendIntent.setType("text/plain");
-        sendIntent.setPackage("com.whatsapp");
-        startActivity(sendIntent);
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+            sendIntent.setType("text/plain");
+            sendIntent.setPackage("com.whatsapp");
+            startActivity(sendIntent);
+        }
     }
 
     private void syncAllStops(){

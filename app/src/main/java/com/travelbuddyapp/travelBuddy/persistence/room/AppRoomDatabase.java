@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.persistence;
+package com.travelbuddyapp.travelBuddy.persistence.room;
 
 import android.content.Context;
 
@@ -8,12 +8,14 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.travelbuddyapp.travelBuddy.model.Config;
-import com.travelbuddyapp.travelBuddy.model.LocalDateConverter;
 import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.persistence.room.dao.ConfigDao;
+import com.travelbuddyapp.travelBuddy.persistence.room.dao.StopDao;
+import com.travelbuddyapp.travelBuddy.persistence.room.dao.TripDao;
 
-@Database(entities = {Config.class, Trip.class, Stop.class}, version = 5, exportSchema = false)
-@TypeConverters({LocalDateConverter.class})
+@Database(entities = {Config.class, Trip.class, Stop.class}, version = 6, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "database.db"; //TODO magic

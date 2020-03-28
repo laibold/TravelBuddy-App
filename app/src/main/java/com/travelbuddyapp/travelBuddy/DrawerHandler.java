@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 public class DrawerHandler {
     private static DrawerHandler instance;
@@ -22,7 +22,7 @@ public class DrawerHandler {
 
     public void setDrawerData(){
         NavigationView navigationView = activity.findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
 
         int currentTripID = database.configDao().getCurrentTrip();
         Trip selectedTrip = database.tripDao().getTrip(currentTripID);

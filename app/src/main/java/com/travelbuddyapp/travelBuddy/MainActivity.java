@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,15 +19,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView tripListView;
-    private TripListAdapter tripListAdapter;
-    private DrawerLayout drawer;
+    ListView tripListView;
+    TripListAdapter tripListAdapter;
+    DrawerLayout drawer;
 
     private int createTripReqCode;
     private AppRoomDatabase database;
@@ -128,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
     public void onTripSelected(int position){
         int databaseID = allTrips.get(position).getId();
         database.configDao().setCurrentTrip(databaseID);
+        tripListView.setItemChecked(position, true);
+        int pos = tripListView.getCheckedItemPosition();
+        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
         drawerHandler.setDrawerData();
     }
 

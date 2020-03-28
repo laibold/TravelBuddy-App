@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.persistence;
+package com.travelbuddyapp.travelBuddy.persistence.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

@@ -1,10 +1,13 @@
 package com.travelbuddyapp.travelBuddy.persistence;
 
 import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
 
 import java.util.ArrayList;
 
 public interface PersistenceHandling {
-    public void saveTrip(Trip trip);
-    public ArrayList<Trip> getTrips();
+    void saveTrip(Trip trip);
+    ArrayList<Trip> getTrips();
+    ArrayList<PackingItem> getPackingItems(TripType tripType);
 }

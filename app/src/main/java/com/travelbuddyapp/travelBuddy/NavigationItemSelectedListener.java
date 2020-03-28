@@ -37,22 +37,19 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         if (id == R.id.nav_trips) {
             text = "trips";
             classToStart = MainActivity.class;
-            //intent = new Intent(currentContext, MainActivity.class);
         } else if (id == R.id.nav_stops) {
             text = "content_stops";
             classToStart = AllStopsActivity.class;
-            //intent = new Intent(currentContext, AllStopsActivity.class);
         } else if (id == R.id.nav_diary) {
             text = "diary";
             classToStart = DebugActivity.class;
-            //intent = new Intent(currentContext, DebugActivity.class);
         } else if (id == R.id.nav_documents) {
             text = "documents";
         } else if (id == R.id.nav_finances) {
             text = "finances";
         }
 
-        if (currentContext.getClass() != classToStart){
+        if (currentContext.getClass() != classToStart && classToStart != null){
             Intent intent = new Intent(currentContext, classToStart);
             currentContext.startActivity(intent);
 

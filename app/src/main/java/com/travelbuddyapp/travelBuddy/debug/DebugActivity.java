@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.persistence.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 public class DebugActivity extends AppCompatActivity {
 

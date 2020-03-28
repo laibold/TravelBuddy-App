@@ -25,6 +25,9 @@ public class Trip implements Parcelable {
 	@ColumnInfo
 	private String name;
 
+	@ColumnInfo
+	TripType tripType;
+
 	//private UserList userList;
 
 	@ColumnInfo
@@ -79,6 +82,14 @@ public class Trip implements Parcelable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public TripType getTripType() {
+		return tripType;
+	}
+
+	public void setTripType(TripType tripType) {
+		this.tripType = tripType;
 	}
 
 	/*public UserList getUserList() {
