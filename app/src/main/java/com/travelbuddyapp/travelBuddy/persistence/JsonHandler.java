@@ -1,9 +1,5 @@
 package com.travelbuddyapp.travelBuddy.persistence;
 
-import android.content.res.Resources;
-
-import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.model.Trip;
 import com.travelbuddyapp.travelBuddy.model.TripType;
 import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
 
@@ -16,21 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class JsonHandler implements PersistenceHandling {
-    @Override
-    public void saveTrip(Trip trip) {
+public class JsonHandler  {
 
-    }
-
-    @Override
-    public ArrayList<Trip> getTrips() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<PackingItem> getPackingItems(TripType tripType) {
+    public ArrayList<PackingItem> getPackingItems(TripType tripType, InputStream inputStream){
         ArrayList<PackingItem> packingItems = new ArrayList<>();
-        InputStream inputStream = Resources.getSystem().openRawResource(R.raw.backpacking); //TODO abhaengig von tripType
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         int data;
@@ -47,7 +32,7 @@ public class JsonHandler implements PersistenceHandling {
 
         try {
             JSONObject jObject = new JSONObject(byteArrayOutputStream.toString());
-            JSONArray jArray = jObject.getJSONArray("items");
+            JSONArray jArray = jObject.getJSONArray(tripType.toString()); //eg. BACKPACKING
             String name = "";
             for (int i=0; i < jArray.length(); i++){
                 name = jArray.getString(i);
@@ -59,4 +44,5 @@ public class JsonHandler implements PersistenceHandling {
 
         return packingItems;
     }
+
 }

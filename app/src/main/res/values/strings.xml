@@ -30,13 +30,20 @@
     <string name="error_entername">Bitte Namen angeben!</string>
     <string name="error_enterdate">Bitte Datum angeben!</string>
 
-    <string-array name="kind_of_trip">
-        <item>Hotelreise</item>
-        <item>Rundreise</item>
-        <item>Rucksack-Rundreise</item>
-        <item>Festival</item>
-        <item>Camping-Urlaub</item>
-        <item>Andere</item>
+    <string name="trip_type_hotel">Hotelreise</string>
+    <string name="trip_type_circular">Rundreise</string>
+    <string name="trip_type_backpacking">Rucksack-Rundreise</string>
+    <string name="trip_type_festival">Festival</string>
+    <string name="trip_type_camping">Camping-Urlaub</string>
+    <string name="trip_type_other">Andere</string>
+
+    <string-array name="trip_type">
+        <item>@string/trip_type_hotel</item>
+        <item>@string/trip_type_circular</item>
+        <item>@string/trip_type_backpacking</item>
+        <item>@string/trip_type_festival</item>
+        <item>@string/trip_type_camping</item>
+        <item>@string/trip_type_other</item>
     </string-array>
 
     <string-array name="stop_salutations">

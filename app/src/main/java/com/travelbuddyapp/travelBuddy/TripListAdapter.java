@@ -32,7 +32,10 @@ public class TripListAdapter extends ArrayAdapter<Trip> {
         ImageView imageView = rowView.findViewById(R.id.createTrip_tripicon_image);
         TextView subtitleText = rowView.findViewById(R.id.tripsubtitle);
 
-        titleText.setText(trips.get(position).getName());
+        int tripTypeID = trips.get(position).getTripType().getStringResourceID();
+        String TripTypeStr = context.getResources().getString(tripTypeID);
+
+        titleText.setText(trips.get(position).getName() + " (" + TripTypeStr + ")");
         imageView.setImageResource(trips.get(position).getImageResource());
 
         Locale locale = context.getResources().getConfiguration().getLocales().get(0);

@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.model.TripType;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 import java.util.ArrayList;
@@ -142,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onExamplesPressed(View v){
-        Trip thailand = new Trip("Thailand","03.03.2018", "17.03.2018", R.drawable.thailand);
-        Trip vietbotschkok = new Trip("Vietbotschkok", "08.03.2019", "02.04.2019", R.drawable.vietnam);
-        Trip portugal = new Trip("Portugal & Spanien", "21.08.2019", "04.09.2019", R.drawable.portugal);
-        Trip uganda = new Trip("Uganda", "01.01.2023", "02.01.2023", R.drawable.uganda);
+        Trip thailand = new Trip("Thailand", TripType.HOTEL, "03.03.2018", "17.03.2018", R.drawable.thailand);
+        Trip vietbotschkok = new Trip("Vietbotschkok", TripType.CAMPING, "08.03.2019", "02.04.2019", R.drawable.vietnam);
+        Trip portugal = new Trip("Portugal & Spanien", TripType.CIRCULAR, "21.08.2019", "04.09.2019", R.drawable.portugal);
+        Trip uganda = new Trip("Uganda", TripType.FESTIVAL, "01.01.2023", "02.01.2023", R.drawable.uganda);
 
         database.tripDao().insertTrip(thailand);
         database.tripDao().insertTrip(vietbotschkok);
@@ -160,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == createTripReqCode) {
             if (resultCode == RESULT_OK) {
                 Trip newTrip = data.getParcelableExtra("newTrip");
-                //tripManager.addTrip(newTrip);
                 database.tripDao().insertTrip(newTrip);
                 syncAllTrips();
             }
