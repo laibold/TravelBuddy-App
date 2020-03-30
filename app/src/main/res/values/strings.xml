@@ -1,17 +1,19 @@
 <resources>
+    <string name="currTrip">Reise Reise</string>
+
     <string name="app_name">TravelBuddy</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Thailand</string>
     <string name="nav_header_subtitle">Marvin</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Einstellungen</string>
+    <string name="settings">Einstellungen</string>
 
-    <string name="menu_travels">Reisen</string>
+    <string name="menu_trips">Reisen</string>
     <string name="menu_stops">Stops</string>
     <string name="menu_diary">Tagebuch</string>
     <string name="menu_documents">Dokumente</string>
-    <string name="menu_packinglist">Packlisten</string>
+    <string name="menu_packinglist">Packliste</string>
     <string name="menu_finances">Finanzen</string>
     <string name="menu_debts">Schulden</string>
 
@@ -22,13 +24,75 @@
     <string name="createTrip_until">bis</string>
     <string name="createTrip_endDate_hint">End-Datum</string>
 
+    <string name="createStop_InfoTitle">Neuer Stop</string>
+    <string name="createStop_name_hint">Name</string>
 
-    <string-array name="kind_of_travel">
-        <item>Hotelreise</item>
-        <item>Rundreise</item>
-        <item>Rucksack-Rundreise</item>
-        <item>Fesitval</item>
-        <item>Camping-Urlaub</item>
-        <item>Andere</item>
+    <string name="error_entername">Bitte Namen angeben!</string>
+    <string name="error_enterdate">Bitte Datum angeben!</string>
+
+    <string name="trip_type_hotel">Hotelreise</string>
+    <string name="trip_type_circular">Rundreise</string>
+    <string name="trip_type_backpacking">Rucksack-Rundreise</string>
+    <string name="trip_type_festival">Festival</string>
+    <string name="trip_type_camping">Camping-Urlaub</string>
+    <string name="trip_type_other">Andere</string>
+
+    <string-array name="trip_type">
+        <item>@string/trip_type_hotel</item>
+        <item>@string/trip_type_circular</item>
+        <item>@string/trip_type_backpacking</item>
+        <item>@string/trip_type_festival</item>
+        <item>@string/trip_type_camping</item>
+        <item>@string/trip_type_other</item>
     </string-array>
+
+    <string-array name="stop_salutations">
+        <item>Hallo ihr Lieben,</item>
+        <item>Hallihallo,</item>
+        <item>Guten Tacho,</item>
+        <item>Hallöchen,</item>
+        <item>Tachchen,</item>
+        <item>Hallo ihr Nutten,</item>
+        <item>Hallo ihr Süßis,</item>
+        <item>Hallo ihr Schweinebacken,</item>
+        <item>Howdy Freunde,</item>
+        <item>Gude,</item>
+        <item>Moin Moin,</item>
+        <item>Grüß Gott,</item>
+        <item>Serwuss Erdnuss,</item>
+        <item>Bongiorno John Porno,</item>
+    </string-array>
+
+    <string-array name="stop_arrivals">
+        <item>bin gerade in $stop angekommen.</item>
+        <item>wir sind gleich in $stop.</item>
+        <item>gleich erreichen wir $stop.</item>
+        <item>$stop ist schon in Sichtweite.</item>
+        <item>nicht mehr weit bis $stop.</item>
+        <item>ich melde mich aus $stop.</item>
+        <item>$stop ist wirklich sehr schön.</item>
+        <item>$stop ist bis jetzt der Höhepunkt.</item>
+        <item>$stop ist unfassbar schön.</item>
+        <item>$stop besticht durch ihre dominante Schönheit.</item>
+        <item>$stop ist meine Herrin und ich werde $stop bis an mein Lebensende dienen.</item>
+        <item>es ist so schön in $stop. Ich glaube, ich bleibe bis an mein Lebensende hier.</item>
+    </string-array>
+
+    <string-array name="stop_closings">
+        <item>Bis Denver!</item>
+        <item>Bis Baldrian!</item>
+        <item>Melde mich!</item>
+        <item>Tschau Kakau.</item>
+        <item>Schreibe euch dann später.</item>
+        <item>Freue mich schon.</item>
+        <item>Bis Spätersile.</item>
+        <item>Machts gut, ihr Nutten.</item>
+        <item>Tschüssli Müsli.</item>
+        <item>Bleibt sauber.</item>
+        <item>San Frantschüssco.</item>
+        <item>Lasst die Finger von harten Drogen.</item>
+        <item>Halt die Ohren steif, du Aff!</item>
+        <item>Gruß und Kuss!</item>
+    </string-array>
+
 </resources>

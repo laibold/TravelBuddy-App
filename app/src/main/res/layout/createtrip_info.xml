@@ -43,7 +43,7 @@
         android:paddingRight="30dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/createTrip_travelicon_cardView"
+            android:id="@+id/createTrip_tripicon_cardView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
@@ -53,7 +53,7 @@
             app:cardCornerRadius="75dp">
 
             <ImageView
-                android:id="@+id/createTrip_travelicon_image"
+                android:id="@+id/createTrip_tripicon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/createTrip_image_description"
@@ -64,7 +64,7 @@
             android:id="@+id/createTrip_tripName_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/createTrip_travelicon_cardView"
+            android:layout_below="@id/createTrip_tripicon_cardView"
             android:layout_marginBottom="20dp"
             android:hint="@string/createTrip_name_hint"
             android:imeOptions="actionDone"
@@ -72,7 +72,7 @@
             android:singleLine="true"/>
 
         <Spinner
-            android:id="@+id/createTrip_kindOfTrip_spinner"
+            android:id="@+id/createTrip_triptype_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/createTrip_tripName_text"
@@ -83,7 +83,7 @@
             android:id="@+id/createTrip_startDate_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/createTrip_kindOfTrip_spinner"
+            android:layout_below="@id/createTrip_triptype_spinner"
             android:clickable="true"
             android:focusable="false"
             android:hint="@string/createTrip_startDate_hint"
@@ -95,7 +95,7 @@
             android:id="@+id/createTrip_until_textView"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:layout_below="@id/createTrip_kindOfTrip_spinner"
+            android:layout_below="@id/createTrip_triptype_spinner"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_toEndOf="@id/createTrip_startDate_text"
@@ -107,7 +107,7 @@
             android:id="@+id/createTrip_endDate_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/createTrip_kindOfTrip_spinner"
+            android:layout_below="@id/createTrip_triptype_spinner"
             android:layout_toEndOf="@id/createTrip_until_textView"
             android:focusable="false"
             android:hint="@string/createTrip_endDate_hint"

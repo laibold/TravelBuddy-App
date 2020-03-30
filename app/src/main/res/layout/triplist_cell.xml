@@ -5,18 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/triplistview_selector"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:elevation="12dp"
-        android:id="@+id/createTrip_travelicon_cardView"
+        android:id="@+id/createTrip_tripicon_cardView"
         app:cardCornerRadius="25dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp">
         <ImageView
-            android:id="@+id/createTrip_travelicon_image"
+            android:id="@+id/createTrip_tripicon_image"
             android:layout_width="match_parent"
             android:layout_height="50dp"
         />
@@ -28,10 +30,11 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="left"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:id="@+id/traveltitle"
+            android:id="@+id/triptitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -39,15 +42,17 @@
             android:padding="2dp"
             android:text="Reise Reise Seemanreise"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4d4d4d"
-            android:textStyle="bold" />
+            android:textColor="@drawable/triplistview_text_selector"
+            android:textStyle="bold"
+            />
 
         <TextView
-            android:id="@+id/travelsubtitle"
+            android:id="@+id/tripsubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Jeder tuts auf seine Weise" />
+            android:text="Jeder tuts auf seine Weise"
+            android:textColor="@drawable/triplistview_text_selector"/>
     </LinearLayout>
 
 </LinearLayout>

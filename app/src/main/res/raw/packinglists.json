@@ -1,0 +1,7 @@
+{
+    "HOTEL": ["Pants", "Shorts", "Shirts", "Laptop"],
+    "CIRCULAR": ["Phone", "Book", "Pants", "Money"],
+    "BACKPACKING": ["Toothbrush", "Towel", "Phone", "Book", "Pants"],
+    "CAMPING": ["Tent", "Campfire", "Water", "Bedroll"],
+    "OTHER": []
+}

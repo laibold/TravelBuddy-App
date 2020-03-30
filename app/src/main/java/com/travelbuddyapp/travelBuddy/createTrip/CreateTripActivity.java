@@ -3,17 +3,20 @@ package com.travelbuddyapp.travelBuddy.createTrip;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.TripTypeSpinnerAdapter;
 import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.model.TripType;
 import com.travelbuddyapp.travelBuddy.utils.DatePickerFragement;
 
 import java.text.DateFormat;
@@ -23,10 +26,12 @@ import java.util.Locale;
 public class CreateTripActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     TextView tripNameTextView;
     TextView textViewToSet;
-    Spinner kindOfTripSpinner;
+    Spinner tripTypeSpinner;
     TextView startDateTextView;
     TextView endDateTextView;
     DialogFragment datePicker;
+
+    TripTypeSpinnerAdapter spinnerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -34,7 +39,7 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         setContentView(R.layout.createtrip_info);
 
         tripNameTextView = findViewById(R.id.createTrip_tripName_text);
-        kindOfTripSpinner = findViewById(R.id.createTrip_kindOfTrip_spinner);
+        tripTypeSpinner = findViewById(R.id.createTrip_triptype_spinner);
         startDateTextView = findViewById(R.id.createTrip_startDate_text);
         endDateTextView = findViewById(R.id.createTrip_endDate_text);
         datePicker = new DatePickerFragement();
@@ -50,10 +55,8 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void setSpinner(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.kind_of_travel, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        kindOfTripSpinner.setAdapter(adapter);
+        spinnerAdapter = new TripTypeSpinnerAdapter(this, TripType.values());
+        tripTypeSpinner.setAdapter(spinnerAdapter);
     }
 
     public void setStartDate(View v){
@@ -69,15 +72,15 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
     public void next(View v){
         boolean haserrors = false;
         if( TextUtils.isEmpty(tripNameTextView.getText())) {
-            tripNameTextView.setError("Bitte Namen eingeben!");
+            tripNameTextView.setError(getResources().getString(R.string.error_entername));
             haserrors = true;
         }
         if( TextUtils.isEmpty(startDateTextView.getText())) {
-            startDateTextView.setError("Bitte Datum eingeben!");
+            startDateTextView.setError(getResources().getString(R.string.error_enterdate));
             haserrors = true;
         }
         if( TextUtils.isEmpty(endDateTextView.getText())) {
-            endDateTextView.setError("Bitte Datum eingeben!");
+            endDateTextView.setError(getResources().getString(R.string.error_enterdate));
             haserrors = true;
         }
 
@@ -85,10 +88,13 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
 
             Intent data = new Intent();
 
+            Toast.makeText(getApplicationContext(), TripType.values()[tripTypeSpinner.getSelectedItemPosition()].toString(), Toast.LENGTH_SHORT).show();
+
             //---set the data to pass back---
             data.putExtra("newTrip",
                     new Trip(
                             tripNameTextView.getText().toString(),
+                            TripType.values()[tripTypeSpinner.getSelectedItemPosition()], //FIXME enum kann nicht übernommen werden, stattdessen mit ordinal oder so machen
                             startDateTextView.getText().toString(),
                             endDateTextView.getText().toString(),
                             R.drawable.vietnam));

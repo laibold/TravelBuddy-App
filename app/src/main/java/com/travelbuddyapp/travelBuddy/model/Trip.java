@@ -3,24 +3,43 @@ package com.travelbuddyapp.travelBuddy.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.travelbuddyapp.travelBuddy.R;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Travels contain a UserList and a financesManager
+ * Trips contain a UserList and a financesManager
  * @author Marvin
  *
  */
+@Entity
 public class Trip implements Parcelable {
+	@ColumnInfo
+	@PrimaryKey(autoGenerate = true)
+	private int id;
+
+	@ColumnInfo
 	private String name;
+
+	@ColumnInfo
+	private TripType tripType;
+
 	//private UserList userList;
+
+	@ColumnInfo
 	private LocalDate startDate;
+
+	@ColumnInfo
 	private LocalDate endDate;
+
 	//private FinancesManager financesMgr = new FinancesManager();
 	//private StopManager stopMgr = new StopManager();
+
+	@ColumnInfo
 	private int imageResource;
 
 	/**
@@ -30,18 +49,31 @@ public class Trip implements Parcelable {
 	 * @param startDate Starting Date of the Trip
 	 * @param endDate End Date of the Trip
 	 */
-	public Trip(String name, /*UserList userList,*/ String startDate, String endDate, int imageResource) {
+	public Trip(String name, /*UserList userList,*/ TripType tripType, String startDate, String endDate, int imageResource) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 		this.name = name;
 		//this.userList = userList;
+
+		this.tripType = tripType;
 
 		this.startDate = LocalDate.parse(startDate, formatter);
 		this.endDate = LocalDate.parse(startDate, formatter);
 
 		this.imageResource = imageResource;
 	}
-	
+
+	public Trip(){
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	/*public FinancesManager getFinancesManager() {
 		return this.financesMgr;
 	}*/
@@ -52,6 +84,14 @@ public class Trip implements Parcelable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public TripType getTripType() {
+		return tripType;
+	}
+
+	public void setTripType(TripType tripType) {
+		this.tripType = tripType;
 	}
 
 	/*public UserList getUserList() {
@@ -118,12 +158,14 @@ public class Trip implements Parcelable {
 		return imageResource;
 	}
 
-
+	public void setImageResource(int imageResource) {
+		this.imageResource = imageResource;
+	}
 
 	//Parcel-Shit
-
 	protected Trip(Parcel in) {
 		name = in.readString();
+		tripType = TripType.values()[in.readInt()];
 		startDate = (LocalDate) in.readValue(LocalDate.class.getClassLoader());
 		endDate = (LocalDate) in.readValue(LocalDate.class.getClassLoader());
 		imageResource = in.readInt();
@@ -137,6 +179,7 @@ public class Trip implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
+		dest.writeInt(tripType.ordinal());
 		dest.writeValue(startDate);
 		dest.writeValue(endDate);
 		dest.writeInt(imageResource);
