@@ -8,6 +8,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+
 import java.util.ArrayList;
 import java.util.Random;
 

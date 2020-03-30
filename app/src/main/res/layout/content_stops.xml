@@ -14,9 +14,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="50dp"
-        android:choiceMode="singleChoice">
-
-    </ListView>
+        android:choiceMode="singleChoice"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_trip_btn"

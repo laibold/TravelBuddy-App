@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_menu_packinglist"
             android:title="@string/menu_packinglist" />
         <item
-            android:id="@+id/nav_documents"
+            android:id="@+id/nav_debug"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_documents" />
+            android:title="@string/menu_debug" />
     </group>
 
     <item android:title="Communicate">

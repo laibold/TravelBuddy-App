@@ -2,7 +2,7 @@ package com.travelbuddyapp.travelBuddy.persistence.room;
 
 import androidx.room.TypeConverter;
 
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 
 import java.time.LocalDate;
 

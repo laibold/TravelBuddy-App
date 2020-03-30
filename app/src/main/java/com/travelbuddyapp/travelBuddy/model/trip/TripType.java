@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.model;
+package com.travelbuddyapp.travelBuddy.model.trip;
 
 import com.travelbuddyapp.travelBuddy.R;
 

@@ -16,6 +16,7 @@
     <string name="menu_packinglist">Packliste</string>
     <string name="menu_finances">Finanzen</string>
     <string name="menu_debts">Schulden</string>
+    <string name="menu_debug">Debug</string>
 
     <string name="createTrip_InfoTitle">Neue Reise | Infos</string>
     <string name="createTrip_image_description">Bild der Reise</string>

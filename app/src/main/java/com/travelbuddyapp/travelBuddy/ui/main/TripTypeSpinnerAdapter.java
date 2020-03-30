@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 
 public class TripTypeSpinnerAdapter extends ArrayAdapter<TripType> {
     Context context;

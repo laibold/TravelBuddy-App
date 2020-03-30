@@ -2,6 +2,7 @@
     "HOTEL": ["Pants", "Shorts", "Shirts", "Laptop"],
     "CIRCULAR": ["Phone", "Book", "Pants", "Money"],
     "BACKPACKING": ["Toothbrush", "Towel", "Phone", "Book", "Pants"],
+    "FESTIVAL": ["Toothbrush", "Towel", "Phone", "Music", "Tent", "Condoms"],
     "CAMPING": ["Tent", "Campfire", "Water", "Bedroll"],
-    "OTHER": []
+    "OTHER": ["Whatever you want"]
 }

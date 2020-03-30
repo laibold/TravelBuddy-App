@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
-import com.travelbuddyapp.travelBuddy.stop.AllStopsActivity;
+import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.ui.debug.DebugActivity;
+import com.travelbuddyapp.travelBuddy.ui.main.MainActivity;
+import com.travelbuddyapp.travelBuddy.ui.packingList.PackingListActivity;
+import com.travelbuddyapp.travelBuddy.ui.stops.AllStopsActivity;
 
 public class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,9 +44,10 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
             text = "content_stops";
             classToStart = AllStopsActivity.class;
         } else if (id == R.id.nav_packinglist) {
-            text = "debug";
-        } else if (id == R.id.nav_documents) {
             text = "packinglist";
+            classToStart = PackingListActivity.class;
+        } else if (id == R.id.nav_debug) {
+            text = "debug";
             classToStart = DebugActivity.class;
         } else if (id == R.id.nav_finances) {
             text = "finances";

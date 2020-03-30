@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".debug.DebugActivity"
+    tools:context=".ui.debug.DebugActivity"
     android:id="@+id/debug_layout">
 
 </LinearLayout>

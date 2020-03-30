@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.createTrip;
+package com.travelbuddyapp.travelBuddy.ui.main.createTrip;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.TripTypeSpinnerAdapter;
-import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.model.TripType;
-import com.travelbuddyapp.travelBuddy.utils.DatePickerFragement;
+import com.travelbuddyapp.travelBuddy.ui.main.TripTypeSpinnerAdapter;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
+import com.travelbuddyapp.travelBuddy.ui.utils.DatePickerFragement;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -90,14 +90,15 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
 
             Toast.makeText(getApplicationContext(), TripType.values()[tripTypeSpinner.getSelectedItemPosition()].toString(), Toast.LENGTH_SHORT).show();
 
+            Trip newTrip = new Trip(
+                    tripNameTextView.getText().toString(),
+                    TripType.values()[tripTypeSpinner.getSelectedItemPosition()],
+                    startDateTextView.getText().toString(),
+                    endDateTextView.getText().toString(),
+                    R.drawable.vietnam);
+
             //---set the data to pass back---
-            data.putExtra("newTrip",
-                    new Trip(
-                            tripNameTextView.getText().toString(),
-                            TripType.values()[tripTypeSpinner.getSelectedItemPosition()], //FIXME enum kann nicht übernommen werden, stattdessen mit ordinal oder so machen
-                            startDateTextView.getText().toString(),
-                            endDateTextView.getText().toString(),
-                            R.drawable.vietnam));
+            data.putExtra("newTrip", newTrip);
             setResult(RESULT_OK, data);
 
             finish();

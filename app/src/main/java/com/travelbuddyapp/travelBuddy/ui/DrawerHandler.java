@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,7 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 public class DrawerHandler {

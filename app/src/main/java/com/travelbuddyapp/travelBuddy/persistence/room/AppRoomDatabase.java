@@ -9,12 +9,14 @@ import androidx.room.TypeConverters;
 
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Stop;
-import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.ConfigDao;
+import com.travelbuddyapp.travelBuddy.persistence.room.dao.PackingItemDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.StopDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.TripDao;
 
-@Database(entities = {Config.class, Trip.class, Stop.class}, version = 6, exportSchema = false)
+@Database(entities = {Config.class, Trip.class, Stop.class, PackingItem.class}, version = 7, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
@@ -38,5 +40,5 @@ public abstract class AppRoomDatabase extends RoomDatabase {
     public abstract ConfigDao configDao();
     public abstract TripDao tripDao();
     public abstract StopDao stopDao();
-
+    public abstract PackingItemDao packingItemDao();
 }

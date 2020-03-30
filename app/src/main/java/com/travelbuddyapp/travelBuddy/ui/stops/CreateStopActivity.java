@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.stop;
+package com.travelbuddyapp.travelBuddy.ui.stops;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
-import com.travelbuddyapp.travelBuddy.model.Trip;
 
 public class CreateStopActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
