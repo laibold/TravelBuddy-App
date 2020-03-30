@@ -90,14 +90,15 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
 
             Toast.makeText(getApplicationContext(), TripType.values()[tripTypeSpinner.getSelectedItemPosition()].toString(), Toast.LENGTH_SHORT).show();
 
+            Trip newTrip = new Trip(
+                    tripNameTextView.getText().toString(),
+                    TripType.values()[tripTypeSpinner.getSelectedItemPosition()],
+                    startDateTextView.getText().toString(),
+                    endDateTextView.getText().toString(),
+                    R.drawable.vietnam);
+
             //---set the data to pass back---
-            data.putExtra("newTrip",
-                    new Trip(
-                            tripNameTextView.getText().toString(),
-                            TripType.values()[tripTypeSpinner.getSelectedItemPosition()], //FIXME enum kann nicht übernommen werden, stattdessen mit ordinal oder so machen
-                            startDateTextView.getText().toString(),
-                            endDateTextView.getText().toString(),
-                            R.drawable.vietnam));
+            data.putExtra("newTrip", newTrip);
             setResult(RESULT_OK, data);
 
             finish();

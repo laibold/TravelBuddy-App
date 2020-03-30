@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_documents"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_documents" />
+            android:title="@string/menu_debug" />
     </group>
 
     <item android:title="Communicate">

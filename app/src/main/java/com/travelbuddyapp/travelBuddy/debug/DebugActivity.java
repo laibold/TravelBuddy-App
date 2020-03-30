@@ -31,16 +31,23 @@ public class DebugActivity extends AppCompatActivity {
 
         int currTripId = database.configDao().getCurrentTrip();
         Trip currTrip = database.tripDao().getTrip(currTripId);
-        TripType currTripType = currTrip.getTripType();
 
-        ArrayList<PackingItem> list = jsonHandler.getPackingItems(currTripType, getResources().openRawResource(R.raw.packinglists));
+        String s = "";
+        if(currTrip == null){
+            s += "No trip selected.";
+        } else{
+            TripType currTripType = currTrip.getTripType();
 
-        String tripTypeName = getString(currTripType.getStringResourceID());
-        String s = "Trip: " +  currTrip.getName() + "\nType: " + tripTypeName + "\n";
+            ArrayList<PackingItem> list = jsonHandler.getPackingItems(currTripType, getResources().openRawResource(R.raw.packinglists));
 
-        for (PackingItem item : list){
-            s += item.getName() + "\n";
+            String tripTypeName = getString(currTripType.getStringResourceID());
+            s = "Trip: " +  currTrip.getName() + "\nType: " + tripTypeName + "\n\nPackingList:\n";
+
+            for (PackingItem item : list){
+                s += item.getName() + "\n";
+            }
         }
+
 
         TextView testView = new TextView(getApplicationContext());
 
