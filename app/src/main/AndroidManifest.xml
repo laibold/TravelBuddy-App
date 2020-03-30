@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.packingList.PackingListActivity"></activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
@@ -24,22 +23,26 @@
             android:name=".ui.main.createTrip.CreateTripActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.stops.AllStopsActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.stops.CreateStopActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.stops.AllStopsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.packingList.PackingListActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.debug.DebugActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.debug.DebugActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

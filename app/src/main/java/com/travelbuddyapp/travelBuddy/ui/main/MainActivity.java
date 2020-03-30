@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,25 +16,32 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.createTrip.CreateTripActivity;
+import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Config;
-import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
+import com.travelbuddyapp.travelBuddy.persistence.JsonHandler;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
+import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
+import com.travelbuddyapp.travelBuddy.ui.main.createTrip.CreateTripActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView tripListView;
-    TripListAdapter tripListAdapter;
-    DrawerLayout drawer;
+    private ListView tripListView;
+    private TripListAdapter tripListAdapter;
+    private DrawerLayout drawer;
 
     private int createTripReqCode;
     private AppRoomDatabase database;
     private ArrayList<Trip> allTrips;
     private NavigationItemSelectedListener navigationItemSelectedListener;
     private DrawerHandler drawerHandler;
+    private JsonHandler jsonHandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         if (database.configDao().countEntries() == 0){
             database.configDao().insertConfig(config); //das darf halt nur ein mal passieren
         }
+
+        jsonHandler = new JsonHandler();
 
         configDrawerNavigation();
         configTripList();
@@ -76,13 +85,7 @@ public class MainActivity extends AppCompatActivity {
         tripListView = findViewById(R.id.content_main_trips_list);
         tripListView.setAdapter(tripListAdapter);
 
-        int currentTripId = database.configDao().getCurrentTrip();
-        for (int i=0; i < allTrips.size(); i++){
-            if (allTrips.get(i).getId() == currentTripId) {
-                tripListView.setItemChecked(i, true);
-                break;
-            }
-        }
+        setCurrentTripChecked();
 
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,6 +93,16 @@ public class MainActivity extends AppCompatActivity {
                 onTripSelected(position);
             }
         });
+    }
+
+    private void setCurrentTripChecked(){
+        int currentTripId = database.configDao().getCurrentTrip();
+        for (int i=0; i < allTrips.size(); i++){
+            if (allTrips.get(i).getId() == currentTripId) {
+                tripListView.setItemChecked(i, true);
+                break;
+            }
+        }
     }
 
     @Override
@@ -148,12 +161,11 @@ public class MainActivity extends AppCompatActivity {
         Trip portugal = new Trip("Portugal & Spanien", TripType.CIRCULAR, "21.08.2019", "04.09.2019", R.drawable.portugal);
         Trip uganda = new Trip("Uganda", TripType.FESTIVAL, "01.01.2023", "02.01.2023", R.drawable.uganda);
 
-        database.tripDao().insertTrip(thailand);
-        database.tripDao().insertTrip(vietbotschkok);
-        database.tripDao().insertTrip(portugal);
-        database.tripDao().insertTrip(uganda);
+        insertTripWithPackingList(thailand);
+        insertTripWithPackingList(vietbotschkok);
+        insertTripWithPackingList(portugal);
+        insertTripWithPackingList(uganda);
 
-        syncAllTrips();
     }
 
     //Result from createTrip
@@ -161,10 +173,26 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == createTripReqCode) {
             if (resultCode == RESULT_OK) {
                 Trip newTrip = data.getParcelableExtra("newTrip");
-                database.tripDao().insertTrip(newTrip);
-                syncAllTrips();
+                insertTripWithPackingList(newTrip);
             }
         }
+    }
+
+    private void insertTripWithPackingList(Trip trip){
+        int tripId = (int) database.tripDao().insertTrip(trip);
+        database.configDao().setCurrentTrip(tripId);
+        setCurrentTripChecked();
+
+        List<Trip> allTrips = database.tripDao().getTrips();
+
+        //PackingItems erstellen
+        ArrayList<PackingItem> list = jsonHandler.getPackingItems(trip.getTripType(), getResources().openRawResource(R.raw.packinglists));
+        for (PackingItem item : list){
+            item.setTripId(tripId);
+            database.packingItemDao().insertPackingItem(item);
+        }
+
+        syncAllTrips();
     }
 
     private void syncAllTrips(){

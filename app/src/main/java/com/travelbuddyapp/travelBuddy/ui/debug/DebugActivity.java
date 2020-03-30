@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.debug;
+package com.travelbuddyapp.travelBuddy.ui.debug;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -7,8 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
 import com.travelbuddyapp.travelBuddy.persistence.JsonHandler;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;

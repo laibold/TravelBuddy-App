@@ -4,14 +4,17 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.packingList.PackingListActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
     <CheckBox
+        android:id="@+id/packinglist_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:scaleX="1.1"
-        android:scaleY="1.1"/>
+        android:scaleY="1.1"
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/packinglist_stoptitle"

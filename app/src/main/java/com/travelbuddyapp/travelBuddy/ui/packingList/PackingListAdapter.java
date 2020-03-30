@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.travelbuddyapp.travelBuddy.R;
@@ -20,16 +21,23 @@ public class PackingListAdapter extends ArrayAdapter<PackingItem> {
         super(context, R.layout.packinglist_cell, items);
         this.context = context;
         this.items = items;
+        this.setNotifyOnChange(true);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.packinglist_cell, null, true);
+
+        CheckBox checkBox = rowView.findViewById(R.id.packinglist_checkbox);
+        if (items.get(position).isChecked()){
+            checkBox.setChecked(true);
+        }
 
         TextView itemTitle = rowView.findViewById(R.id.packinglist_stoptitle);
         itemTitle.setText(items.get(position).getName());
 
         return rowView;
     }
+
 }

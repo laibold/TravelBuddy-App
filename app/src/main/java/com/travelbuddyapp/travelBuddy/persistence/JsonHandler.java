@@ -14,6 +14,12 @@ import java.util.ArrayList;
 
 public class JsonHandler  {
 
+    /**
+     * Reads PackingItems from inputStream and returns List of Items depending on given tripType
+     * @param tripType type of trip the packingItems should match
+     * @param inputStream inputStream to raw resource with json arrays
+     * @return ArrayList with PackingItems that can be used as a packing list
+     */
     public ArrayList<PackingItem> getPackingItems(TripType tripType, InputStream inputStream){
         ArrayList<PackingItem> packingItems = new ArrayList<>();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

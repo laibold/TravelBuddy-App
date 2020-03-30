@@ -1,18 +1,11 @@
 package com.travelbuddyapp.travelBuddy.model.packingList;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-
-import com.travelbuddyapp.travelBuddy.model.trip.Trip;
-import com.travelbuddyapp.travelBuddy.model.trip.TripType;
-
-@Entity(foreignKeys = @ForeignKey(entity = Trip.class,
+/*@Entity(foreignKeys = @ForeignKey(entity = Trip.class,
         parentColumns = "id",
         childColumns = "tripId",
-        onDelete = ForeignKey.CASCADE))
+        onDelete = ForeignKey.CASCADE))*/
 public class PackingList {
+/* deactivated
 
     @ColumnInfo
     @PrimaryKey(autoGenerate = true)
@@ -42,5 +35,5 @@ public class PackingList {
     public void setTripType(TripType tripType) {
         this.tripType = tripType;
     }
-
+*/
 }

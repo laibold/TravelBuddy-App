@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui.main;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

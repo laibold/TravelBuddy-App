@@ -98,7 +98,6 @@ public class AllStopsActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == createStopReqCode) {
             if (resultCode == RESULT_OK) {
-                //TODO
                 int currentTripId = database.configDao().getCurrentTrip();
                 Stop newStop = data.getParcelableExtra("newStop");
                 newStop.setTripId(currentTripId);

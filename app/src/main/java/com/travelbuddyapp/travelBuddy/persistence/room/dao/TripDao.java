@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface TripDao {
     @Insert
-    void insertTrip(Trip trip);
+    long insertTrip(Trip trip);
 
     @Query("SELECT * FROM Trip")
     List<Trip> getTrips();

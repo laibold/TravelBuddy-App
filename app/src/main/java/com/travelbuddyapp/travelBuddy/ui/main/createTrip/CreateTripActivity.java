@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.createTrip;
+package com.travelbuddyapp.travelBuddy.ui.main.createTrip;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.TripTypeSpinnerAdapter;
-import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.model.TripType;
-import com.travelbuddyapp.travelBuddy.utils.DatePickerFragement;
+import com.travelbuddyapp.travelBuddy.ui.main.TripTypeSpinnerAdapter;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
+import com.travelbuddyapp.travelBuddy.ui.utils.DatePickerFragement;
 
 import java.text.DateFormat;
 import java.util.Calendar;
