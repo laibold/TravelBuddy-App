@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.utils;
+package com.travelbuddyapp.travelBuddy.ui.utils;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.packingList;
+package com.travelbuddyapp.travelBuddy.ui.packingList;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.travelbuddyapp.travelBuddy.R;
 
-public class PackinglistActivity extends AppCompatActivity {
+public class PackingListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

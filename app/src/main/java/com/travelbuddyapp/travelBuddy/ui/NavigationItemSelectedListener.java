@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy;
+package com.travelbuddyapp.travelBuddy.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.debug.DebugActivity;
-import com.travelbuddyapp.travelBuddy.stop.AllStopsActivity;
+import com.travelbuddyapp.travelBuddy.R;
+import com.travelbuddyapp.travelBuddy.ui.debug.DebugActivity;
+import com.travelbuddyapp.travelBuddy.ui.main.MainActivity;
+import com.travelbuddyapp.travelBuddy.ui.stops.AllStopsActivity;
 
 public class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
 

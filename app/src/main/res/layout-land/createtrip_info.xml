@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".createTrip.CreateTripActivity"
+    tools:context=".ui.main.createTrip.CreateTripActivity"
     >
 
     <com.google.android.material.appbar.AppBarLayout

@@ -1,6 +1,6 @@
 package com.travelbuddyapp.travelBuddy.persistence;
 
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
 
 import org.json.JSONArray;

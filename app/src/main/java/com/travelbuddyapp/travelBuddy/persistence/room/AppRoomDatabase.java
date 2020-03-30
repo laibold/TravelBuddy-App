@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import com.travelbuddyapp.travelBuddy.model.Config;
 import com.travelbuddyapp.travelBuddy.model.Stop;
-import com.travelbuddyapp.travelBuddy.model.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.ConfigDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.StopDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.TripDao;

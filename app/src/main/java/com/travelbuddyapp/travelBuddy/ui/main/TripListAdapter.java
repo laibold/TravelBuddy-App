@@ -24,6 +24,7 @@ public class TripListAdapter extends ArrayAdapter<Trip> {
         this.trips = trips;
     }
 
+    @Override
     public View getView(int position, View view, ViewGroup parent){
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.triplist_cell, null, true);
@@ -35,11 +36,11 @@ public class TripListAdapter extends ArrayAdapter<Trip> {
         int tripTypeID = trips.get(position).getTripType().getStringResourceID();
         String TripTypeStr = context.getResources().getString(tripTypeID);
 
-        titleText.setText(trips.get(position).getName() + " (" + TripTypeStr + ")");
+        titleText.setText(trips.get(position).getName());
         imageView.setImageResource(trips.get(position).getImageResource());
 
         Locale locale = context.getResources().getConfiguration().getLocales().get(0);
-        subtitleText.setText(trips.get(position).getStartDate().format(DateTimeFormatter.ofPattern("MMMM yyyy", locale)));
+        subtitleText.setText(trips.get(position).getStartDate().format(DateTimeFormatter.ofPattern("MMMM yyyy", locale)) + ", " + TripTypeStr);
 
         return rowView;
     }

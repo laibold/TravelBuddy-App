@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.stop;
+package com.travelbuddyapp.travelBuddy.ui.stops;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.DrawerHandler;
-import com.travelbuddyapp.travelBuddy.NavigationItemSelectedListener;
+import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
+import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;

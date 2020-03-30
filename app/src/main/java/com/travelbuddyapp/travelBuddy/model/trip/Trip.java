@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.model;
+package com.travelbuddyapp.travelBuddy.model.trip;
 
 import android.os.Parcel;
 import android.os.Parcelable;

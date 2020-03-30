@@ -5,8 +5,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import com.travelbuddyapp.travelBuddy.model.Trip;
-import com.travelbuddyapp.travelBuddy.model.TripType;
+import com.travelbuddyapp.travelBuddy.model.trip.Trip;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 
 @Entity(foreignKeys = @ForeignKey(entity = Trip.class,
         parentColumns = "id",
