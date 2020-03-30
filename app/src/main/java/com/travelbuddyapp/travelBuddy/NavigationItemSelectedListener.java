@@ -40,11 +40,11 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         } else if (id == R.id.nav_stops) {
             text = "content_stops";
             classToStart = AllStopsActivity.class;
-        } else if (id == R.id.nav_diary) {
-            text = "diary";
-            classToStart = DebugActivity.class;
+        } else if (id == R.id.nav_packinglist) {
+            text = "debug";
         } else if (id == R.id.nav_documents) {
-            text = "documents";
+            text = "packinglist";
+            classToStart = DebugActivity.class;
         } else if (id == R.id.nav_finances) {
             text = "finances";
         }
