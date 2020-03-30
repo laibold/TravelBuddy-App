@@ -9,7 +9,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="settings">Einstellungen</string>
 
-    <string name="menu_trips">Reisen</string>
+    <string name="menu_trips">Deine Reisen</string>
     <string name="menu_stops">Stops</string>
     <string name="menu_diary">Tagebuch</string>
     <string name="menu_documents">Dokumente</string>
@@ -37,15 +37,6 @@
     <string name="trip_type_festival">Festival</string>
     <string name="trip_type_camping">Camping-Urlaub</string>
     <string name="trip_type_other">Andere</string>
-
-    <string-array name="trip_type">
-        <item>@string/trip_type_hotel</item>
-        <item>@string/trip_type_circular</item>
-        <item>@string/trip_type_backpacking</item>
-        <item>@string/trip_type_festival</item>
-        <item>@string/trip_type_camping</item>
-        <item>@string/trip_type_other</item>
-    </string-array>
 
     <string-array name="stop_salutations">
         <item>Hallo ihr Lieben,</item>

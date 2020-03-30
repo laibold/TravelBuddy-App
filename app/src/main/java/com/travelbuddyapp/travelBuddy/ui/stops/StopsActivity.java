@@ -24,7 +24,7 @@ import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 
 import java.util.ArrayList;
 
-public class AllStopsActivity extends AppCompatActivity {
+public class StopsActivity extends AppCompatActivity {
 
     private StopListAdapter stopListAdapter;
     private DrawerLayout drawer;
@@ -61,7 +61,7 @@ public class AllStopsActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationItemSelectedListener = new NavigationItemSelectedListener(AllStopsActivity.this, drawer);
+        navigationItemSelectedListener = new NavigationItemSelectedListener(StopsActivity.this, drawer);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
     }
 

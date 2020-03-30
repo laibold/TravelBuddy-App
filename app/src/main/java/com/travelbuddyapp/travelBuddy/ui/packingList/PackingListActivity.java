@@ -61,12 +61,10 @@ public class PackingListActivity extends AppCompatActivity {
         itemListView = findViewById(R.id.content_packinglist_itemlist);
         itemListView.setAdapter(packingListAdapter);
 
-        //itemListView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onListItemClicked(position, view);
+                onListItemClicked(position);
             }
         });
 
@@ -75,19 +73,10 @@ public class PackingListActivity extends AppCompatActivity {
         syncAllItems();
     }
 
-    private void onListItemClicked(int position, View view) {
-        int currentTripId = database.configDao().getCurrentTrip();
-        ArrayList<PackingItem> oldList = new ArrayList<>(database.packingItemDao().getPackingItemsByTripId(currentTripId));
-
+    private void onListItemClicked(int position) {
         allItems.get(position).toggleChecked();
         packingListAdapter.notifyDataSetChanged();
-
         updateTable(position);
-
-        //DEBUG
-        //int currentTripId = database.configDao().getCurrentTrip();
-        ArrayList<PackingItem> newList = new ArrayList<>(database.packingItemDao().getPackingItemsByTripId(currentTripId));
-        int a = 3;
     }
 
     private void updateTable(int position){

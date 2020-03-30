@@ -14,7 +14,7 @@ import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.ui.debug.DebugActivity;
 import com.travelbuddyapp.travelBuddy.ui.main.MainActivity;
 import com.travelbuddyapp.travelBuddy.ui.packingList.PackingListActivity;
-import com.travelbuddyapp.travelBuddy.ui.stops.AllStopsActivity;
+import com.travelbuddyapp.travelBuddy.ui.stops.StopsActivity;
 
 public class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,7 +42,7 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
             classToStart = MainActivity.class;
         } else if (id == R.id.nav_stops) {
             text = "content_stops";
-            classToStart = AllStopsActivity.class;
+            classToStart = StopsActivity.class;
         } else if (id == R.id.nav_packinglist) {
             text = "packinglist";
             classToStart = PackingListActivity.class;

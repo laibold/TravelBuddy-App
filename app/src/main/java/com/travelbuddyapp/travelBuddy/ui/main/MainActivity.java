@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         List<Trip> allTrips = database.tripDao().getTrips();
 
         //PackingItems erstellen
-        ArrayList<PackingItem> list = jsonHandler.getPackingItems(trip.getTripType(), getResources().openRawResource(R.raw.packinglists));
+        ArrayList<PackingItem> list = jsonHandler.getPackingItems(trip.getTripType(), getResources().openRawResource(R.raw.packinglists_de));
         for (PackingItem item : list){
             item.setTripId(tripId);
             database.packingItemDao().insertPackingItem(item);

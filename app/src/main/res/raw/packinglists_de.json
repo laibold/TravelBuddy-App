@@ -1,0 +1,8 @@
+{
+  "HOTEL": ["Pants", "Shorts", "Shirts", "Laptop"],
+  "CIRCULAR": ["Phone", "Book", "Pants", "Money"],
+  "BACKPACKING": ["Medikamente", "Geld", "Reisepass", "Impfpass", "Kreditkarte", "Schloss", "Fön", "Kamera", "Nackenkissen", "T-Shirts", "Pullis", "Jacke", "Socken", "Unterhosen", "Hosen"],
+  "FESTIVAL": ["Tickets", "Handy", "Bauchtasche", "Zelt", "Schlafsack", "T-Shirts", "Zahnbürste", "Handtuch", "Grill", "Musikanlage", "Ohrenstöpsel", "Bier"],
+  "CAMPING": ["Tent", "Campfire", "Water", "Bedroll"],
+  "OTHER": ["Whatever you want"]
+}

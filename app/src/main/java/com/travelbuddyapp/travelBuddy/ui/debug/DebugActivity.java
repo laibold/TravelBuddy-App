@@ -38,7 +38,7 @@ public class DebugActivity extends AppCompatActivity {
         } else{
             TripType currTripType = currTrip.getTripType();
 
-            ArrayList<PackingItem> list = jsonHandler.getPackingItems(currTripType, getResources().openRawResource(R.raw.packinglists));
+            ArrayList<PackingItem> list = jsonHandler.getPackingItems(currTripType, getResources().openRawResource(R.raw.packinglists_de));
 
             String tripTypeName = getString(currTripType.getStringResourceID());
             s = "Trip: " +  currTrip.getName() + "\nType: " + tripTypeName + "\n\nPackingList:\n";

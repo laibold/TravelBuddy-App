@@ -1,3 +1,5 @@
+*.xd
+
 # Built application files
 *.ap_
 !app-debug.apk
