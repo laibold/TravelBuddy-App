@@ -1,6 +1,5 @@
 package com.travelbuddyapp.travelBuddy.ui.stops;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +15,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
-import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
+import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
+import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 
 import java.util.ArrayList;
 
@@ -85,13 +84,12 @@ public class StopsActivity extends AppCompatActivity {
     }
 
     public void onNewStopPressed(View v){
-        Context context = getApplicationContext();
-        CharSequence text = "newStop";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
-        startActivityForResult(new Intent(this, CreateStopActivity.class), createStopReqCode);
+        int currTripId = database.configDao().getCurrentTrip();
+        if(currTripId != 0){
+            startActivityForResult(new Intent(this, CreateStopActivity.class), createStopReqCode);
+        } else{
+            Toast.makeText(getApplicationContext(), "Noch keine Reise angelegt", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Result from createStop
@@ -112,6 +110,7 @@ public class StopsActivity extends AppCompatActivity {
         currentStop = allStops.get(position);
         Button whatsappBtn = findViewById(R.id.whatsappBtn);
         whatsappBtn.setText(currentStop.getName() + " per Whatsapp teilen");
+        startActivity(new Intent(getApplicationContext(), StopDetailActivity.class));
     }
 
     @Override
