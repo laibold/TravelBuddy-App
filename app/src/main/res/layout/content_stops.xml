@@ -27,7 +27,9 @@
         android:layout_marginBottom="30dp"
         app:backgroundTint="#FCFBFB"
         app:srcCompat="@android:drawable/ic_input_add"
-        android:onClick="onNewStopPressed"/>
+        android:onClick="onNewStopPressed"
+        app:borderWidth="0dp"
+        android:tint="@color/colorIconBlack"/>
 
     <Button
         android:id="@+id/whatsappBtn"

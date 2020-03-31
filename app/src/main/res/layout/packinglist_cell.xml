@@ -24,7 +24,7 @@
         android:padding="2dp"
         android:text="Gepackte Packung"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#4d4d4d"
+        android:textColor="@color/colorGreyText"
         android:textStyle="bold"/>
 
 </LinearLayout>
