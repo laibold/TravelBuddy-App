@@ -2,6 +2,7 @@ package com.travelbuddyapp.travelBuddy.ui.main.createTrip;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.ui.main.TripTypeSpinnerAdapter;
 import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 import com.travelbuddyapp.travelBuddy.model.trip.TripType;
+import com.travelbuddyapp.travelBuddy.ui.main.TripTypeSpinnerAdapter;
 import com.travelbuddyapp.travelBuddy.ui.utils.DatePickerFragement;
 
 import java.text.DateFormat;
@@ -32,6 +33,7 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
     DialogFragment datePicker;
 
     TripTypeSpinnerAdapter spinnerAdapter;
+    int selectImageReqCode;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -44,6 +46,8 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         endDateTextView = findViewById(R.id.createTrip_endDate_text);
         datePicker = new DatePickerFragement();
 
+        selectImageReqCode = getResources().getInteger(R.integer.selectImage);
+
         setSpinner();
     }
 
@@ -51,7 +55,17 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), selectImageReqCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == selectImageReqCode) {
+            Uri imageUri = data.getData();
+
+            //TODO speichern und in Trip setzen
+        }
     }
 
     private void setSpinner(){
