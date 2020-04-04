@@ -21,4 +21,7 @@ public interface StopDao {
 
     @Query("SELECT * FROM Stop")
     List<Stop> getAllStops();
+
+    @Query("UPDATE Stop set name = :name WHERE id = :id")
+    void setStopName(int id, String name);
 }
