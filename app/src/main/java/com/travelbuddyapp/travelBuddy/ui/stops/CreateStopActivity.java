@@ -1,14 +1,17 @@
 package com.travelbuddyapp.travelBuddy.ui.stops;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Stop;
@@ -23,6 +26,15 @@ public class CreateStopActivity extends AppCompatActivity implements DatePickerD
         setContentView(R.layout.createstop);
 
         stopNameTextView = findViewById(R.id.createStop_stopName_text);
+
+        configStatusBar();
+    }
+
+    private void configStatusBar(){
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
 
     @Override

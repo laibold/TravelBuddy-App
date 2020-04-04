@@ -7,6 +7,13 @@
     android:orientation="horizontal"
     tools:context=".ui.stops.StopDetailActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/stopdetail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +22,7 @@
         android:paddingRight="30dp">
 
         <EditText
-            android:id="@+id/createStop_stopName_text"
+            android:id="@+id/stopdetail_stop_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

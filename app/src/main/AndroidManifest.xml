@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.stops.StopDetailActivity"
             android:parentActivityName=".ui.stops.StopsActivity"
-
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/stopDetail_stopName"/>
         <activity android:name=".ui.packingList.PackingListActivity"
             android:label="@string/menu_packinglist"
