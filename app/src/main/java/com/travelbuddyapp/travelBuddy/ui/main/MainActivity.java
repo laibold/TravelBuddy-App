@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCurrentTripChecked(){
-        int currentTripId = database.configDao().getCurrentTrip();
+        int currentTripId = database.configDao().getCurrentTripId();
         for (int i=0; i < allTrips.size(); i++){
             if (allTrips.get(i).getId() == currentTripId) {
                 tripListView.setItemChecked(i, true);
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTripSelected(int position){
         int databaseID = allTrips.get(position).getId();
-        database.configDao().setCurrentTrip(databaseID);
+        database.configDao().setCurrentTripId(databaseID);
         tripListView.setItemChecked(position, true);
         int pos = tripListView.getCheckedItemPosition();
         Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResetPressed(View v){
         database.tripDao().clear();
         syncAllTrips();
-        database.configDao().setCurrentTrip(-1);
+        database.configDao().setCurrentTripId(-1);
     }
 
     public void onExamplesPressed(View v){
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertTripWithPackingList(Trip trip){
         int tripId = (int) database.tripDao().insertTrip(trip);
-        database.configDao().setCurrentTrip(tripId);
+        database.configDao().setCurrentTripId(tripId);
         setCurrentTripChecked();
 
         List<Trip> allTrips = database.tripDao().getTrips();

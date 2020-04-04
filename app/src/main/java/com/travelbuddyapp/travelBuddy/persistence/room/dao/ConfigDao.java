@@ -12,11 +12,17 @@ public interface ConfigDao {
     void insertConfig(Config config);
 
     @Query("SELECT currentTripId FROM Config WHERE id = 0")
-    int getCurrentTrip();
+    int getCurrentTripId();
 
     @Query("UPDATE Config SET currentTripId = :id WHERE id = 0")
-    int setCurrentTrip(int id);
+    int setCurrentTripId(int id);
 
     @Query("SELECT count(*) FROM Config")
     int countEntries();
+
+    @Query("SELECT currentStopId FROM Config WHERE id = 0")
+    int getCurrentStopId();
+
+    @Query("UPDATE Config SET currentStopId = :id WHERE id= 0")
+    void setCurrentStopId(int id);
 }

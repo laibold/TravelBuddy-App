@@ -86,7 +86,7 @@ public class PackingListActivity extends AppCompatActivity {
 
     private void syncAllItems() {
         //TODO hier anstaendig, wahrscheinlich LiveData?
-        int currentTripId = database.configDao().getCurrentTrip();
+        int currentTripId = database.configDao().getCurrentTripId();
 
         ArrayList<PackingItem> arrayList = new ArrayList<>(database.packingItemDao().getPackingItemsByTripId(currentTripId));
         allItems.clear();

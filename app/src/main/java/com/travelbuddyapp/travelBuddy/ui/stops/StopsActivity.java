@@ -84,7 +84,7 @@ public class StopsActivity extends AppCompatActivity {
     }
 
     public void onNewStopPressed(View v){
-        int currTripId = database.configDao().getCurrentTrip();
+        int currTripId = database.configDao().getCurrentTripId();
         if(currTripId != 0){
             startActivityForResult(new Intent(this, CreateStopActivity.class), createStopReqCode);
         } else{
@@ -96,7 +96,7 @@ public class StopsActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == createStopReqCode) {
             if (resultCode == RESULT_OK) {
-                int currentTripId = database.configDao().getCurrentTrip();
+                int currentTripId = database.configDao().getCurrentTripId();
                 Stop newStop = data.getParcelableExtra("newStop");
                 newStop.setTripId(currentTripId);
                 database.stopDao().insertStop(newStop);
@@ -108,6 +108,7 @@ public class StopsActivity extends AppCompatActivity {
 
     public void onStopSelected(int position){
         currentStop = allStops.get(position);
+        database.configDao().setCurrentStopId(currentStop.getId());
         Button whatsappBtn = findViewById(R.id.whatsappBtn);
         whatsappBtn.setText(currentStop.getName() + " per Whatsapp teilen");
         startActivity(new Intent(getApplicationContext(), StopDetailActivity.class));
@@ -143,7 +144,7 @@ public class StopsActivity extends AppCompatActivity {
 
     private void syncAllStops(){
         //TODO hier anstaendig, wahrscheinlich LiveData?
-        int currentTripId = database.configDao().getCurrentTrip();
+        int currentTripId = database.configDao().getCurrentTripId();
         ArrayList<Stop> arrayList = new ArrayList<>(database.stopDao().getStopsByTripId(currentTripId));
         allStops.clear();
         allStops.addAll(arrayList);

@@ -25,7 +25,7 @@ public class DrawerHandler {
         NavigationView navigationView = activity.findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
 
-        int currentTripID = database.configDao().getCurrentTrip();
+        int currentTripID = database.configDao().getCurrentTripId();
         Trip selectedTrip = database.tripDao().getTrip(currentTripID);
 
         if(selectedTrip != null) {
