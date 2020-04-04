@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_activated="true"
-        android:color="@color/colorWhiteText">
+        android:color="@color/colorWhiteText"
+        android:drawable="@color/colorWhiteText">
     </item>
 
     <item android:state_activated="false"
-        android:color="@color/colorGreyText">
+        android:color="@color/colorGreyText"
+        android:drawable="@color/colorGreyText">
     </item>
 
 </selector>
