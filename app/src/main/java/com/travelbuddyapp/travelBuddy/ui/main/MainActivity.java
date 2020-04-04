@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +27,6 @@ import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.ui.main.createTrip.CreateTripActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -144,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
         int databaseID = allTrips.get(position).getId();
         database.configDao().setCurrentTripId(databaseID);
         tripListView.setItemChecked(position, true);
-        int pos = tripListView.getCheckedItemPosition();
-        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
         drawerHandler.setDrawerData();
     }
 
@@ -165,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         insertTripWithPackingList(vietbotschkok);
         insertTripWithPackingList(portugal);
         insertTripWithPackingList(uganda);
-
     }
 
     //Result from createTrip
@@ -181,9 +176,6 @@ public class MainActivity extends AppCompatActivity {
     private void insertTripWithPackingList(Trip trip){
         int tripId = (int) database.tripDao().insertTrip(trip);
         database.configDao().setCurrentTripId(tripId);
-        setCurrentTripChecked();
-
-        List<Trip> allTrips = database.tripDao().getTrips();
 
         //PackingItems erstellen
         ArrayList<PackingItem> list = jsonHandler.getPackingItems(trip.getTripType(), getResources().openRawResource(R.raw.packinglists_de));
@@ -193,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         syncAllTrips();
+        setCurrentTripChecked();
     }
 
     private void syncAllTrips(){
