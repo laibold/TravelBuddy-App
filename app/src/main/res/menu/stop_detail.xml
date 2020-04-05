@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="TODO"
+        android:icon="@drawable/ic_more_vert_white"
+        app:showAsAction="always">
+        <menu>
+            <!--item
+                android:id="@+id/stop_detail_menu_edit"
+                android:icon="@drawable/ic_edit_black"
+                android:title="Bearbeiten"/-->
+            <item
+                android:id="@+id/stop_detail_menu_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/stopDetail_menu_share"/>
+            <item
+                android:id="@+id/stop_detail_menu_tripadvisor"
+                android:icon="@drawable/ic_tripadvisor_black"
+                android:title="@string/stopDetail_menu_tripadvisor"/>
+            <item
+                android:id="@+id/stop_detail_menu_weather"
+                android:icon="@drawable/ic_weather"
+                android:title="@string/stopDetail_menu_weather"/>
+
+        </menu>
+
+    </item>
+
+
+</menu>

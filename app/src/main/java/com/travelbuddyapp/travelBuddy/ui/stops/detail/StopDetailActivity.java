@@ -1,7 +1,11 @@
 package com.travelbuddyapp.travelBuddy.ui.stops.detail;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -69,6 +73,47 @@ public class StopDetailActivity extends AppCompatActivity {
         configStatusBar();
         configEditAccommodation();
         configEditNotes();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.stop_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        String tripadvisorUrl = "https://www.tripadvisor.de/Search?q=" + currStop.getName();
+        String weatherUrl = "https://www.accuweather.com/de/search-locations?query=" + currStop.getName();
+
+        switch (id){
+            case R.id.stop_detail_menu_share:
+                String[] salutations = getResources().getStringArray(R.array.stop_salutations);
+                String[] arrivals = getResources().getStringArray(R.array.stop_arrivals);
+                String[] closings = getResources().getStringArray(R.array.stop_closings);
+
+                String message = currStop.generateMessage(salutations, arrivals, closings);
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+                sendIntent.setType("text/plain");
+                //sendIntent.setPackage("com.whatsapp");
+                startActivity(sendIntent);
+                break;
+            case R.id.stop_detail_menu_tripadvisor:
+                Intent tripadvisorBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tripadvisorUrl));
+                startActivity(tripadvisorBrowserIntent);
+                break;
+            case R.id.stop_detail_menu_weather:
+                Intent weatherBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(weatherUrl));
+                startActivity(weatherBrowserIntent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void configToDoList() {

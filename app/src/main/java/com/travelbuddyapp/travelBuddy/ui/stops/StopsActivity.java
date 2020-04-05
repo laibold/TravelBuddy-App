@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -79,11 +78,6 @@ public class StopsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
     public void onNewStopPressed(View v){
         int currTripId = database.configDao().getCurrentTripId();
         if(currTripId != 0){
@@ -110,8 +104,6 @@ public class StopsActivity extends AppCompatActivity {
     public void onStopSelected(int position){
         currentStop = allStops.get(position);
         database.configDao().setCurrentStopId(currentStop.getId());
-        Button whatsappBtn = findViewById(R.id.whatsappBtn);
-        whatsappBtn.setText(currentStop.getName() + " per Whatsapp teilen");
         startActivity(new Intent(getApplicationContext(), StopDetailActivity.class));
     }
 
@@ -121,25 +113,6 @@ public class StopsActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
-    }
-
-    public void onWhatsappPressed(View v){
-        if (currentStop == null){
-            Toast.makeText(getApplicationContext(), "Kein Stop ausgewählt", Toast.LENGTH_SHORT);
-        } else{
-            String[] salutations = getResources().getStringArray(R.array.stop_salutations);
-            String[] arrivals = getResources().getStringArray(R.array.stop_arrivals);
-            String[] closings = getResources().getStringArray(R.array.stop_closings);
-
-            String message = currentStop.generateMessage(salutations, arrivals, closings);
-
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-            sendIntent.setType("text/plain");
-            sendIntent.setPackage("com.whatsapp");
-            startActivity(sendIntent);
         }
     }
 

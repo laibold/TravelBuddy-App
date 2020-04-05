@@ -36,6 +36,10 @@
     <string name="stopDetail_toDo">To-do</string>
     <string name="stopDetail_notes">Notizen</string>
 
+    <string name="stopDetail_menu_share">Teilen</string>
+    <string name="stopDetail_menu_tripadvisor">Tripadvisor</string>
+    <string name="stopDetail_menu_weather">Wetter</string>
+
     <string name="error_entername">Bitte Namen angeben!</string>
     <string name="error_enterdate">Bitte Datum angeben!</string>
 
