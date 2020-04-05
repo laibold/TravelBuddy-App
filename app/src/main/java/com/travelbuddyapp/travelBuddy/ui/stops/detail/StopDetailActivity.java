@@ -167,6 +167,7 @@ public class StopDetailActivity extends AppCompatActivity {
         database.stopDao().setStopName(currStop.getId(), newName);
 
         nameEditText.setVisibility(View.GONE);
+        nameEditText.clearFocus();
         closeKeyboard();
     }
 
@@ -182,6 +183,7 @@ public class StopDetailActivity extends AppCompatActivity {
                 } else{
                     //User left in EditText
                     saveAccommodation();
+                    closeKeyboard();
                 }
             }
         });
@@ -189,8 +191,7 @@ public class StopDetailActivity extends AppCompatActivity {
         accommodationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accommodationEditText.clearFocus();
-                closeKeyboard();
+                accommodationEditText.clearFocus(); //Calls OnFocusChangeListener
             }
         });
     }
@@ -200,7 +201,6 @@ public class StopDetailActivity extends AppCompatActivity {
         closeKeyboard();
         database.stopDao().setAccommodationName(currStop.getId(), accommodationEditText.getText().toString().trim());
         Toast.makeText(getApplicationContext(),"saved accommodation", Toast.LENGTH_SHORT).show();
-
     }
 
     private void configEditNotes() {
@@ -215,6 +215,7 @@ public class StopDetailActivity extends AppCompatActivity {
                 } else{
                     //User left in EditText
                     saveNotes();
+                    closeKeyboard();
                 }
             }
         });
@@ -222,15 +223,14 @@ public class StopDetailActivity extends AppCompatActivity {
         notesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notesEditText.clearFocus();
-                closeKeyboard();
+                notesEditText.clearFocus(); //Calls OnFocusChangeListener
             }
         });
     }
 
     private void saveNotes(){
-        notesButton.setVisibility(View.GONE);
         closeKeyboard();
+        notesButton.setVisibility(View.GONE);
         database.stopDao().setNotes(currStop.getId(), notesEditText.getText().toString().trim());
         Toast.makeText(getApplicationContext(),"saved notes", Toast.LENGTH_SHORT).show();
     }
@@ -249,6 +249,13 @@ public class StopDetailActivity extends AppCompatActivity {
     public void closeKeyboard(){
         InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        View view = this.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        view.clearFocus();
     }
 
 }

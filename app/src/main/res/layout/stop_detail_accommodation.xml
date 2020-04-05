@@ -30,8 +30,7 @@
             android:inputType="text"
             android:singleLine="true"
             android:textSize="16dp"
-            android:hint="@string/stopDetail_accommodationHint"
-            />
+            android:hint="@string/stopDetail_accommodationHint"/>
 
         <ImageButton
             android:id="@+id/stopdetail_accommodation_button"
