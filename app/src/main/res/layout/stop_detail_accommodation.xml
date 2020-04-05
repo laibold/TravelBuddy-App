@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stopdetail_accommodation_label"
+        android:paddingLeft="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stopDetail_accommodation"
+        android:textSize="18dp"
+        android:textColor="@color/colorGreyText"
+        android:layout_marginBottom="7dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stopdetail_accommodation_layout"
+        android:layout_below="@id/stopdetail_accommodation_label">
+
+        <EditText
+            android:id="@+id/stopdetail_accommodation_edittext"
+            android:background="@layout/rounded_border_edittext"
+            android:paddingLeft="7dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="16dp"
+            android:hint="@string/stopDetail_accommodationHint"
+            />
+
+        <ImageButton
+            android:id="@+id/stopdetail_accommodation_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_check_circle_primary"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</RelativeLayout>

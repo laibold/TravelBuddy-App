@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.model.Stop;
+import com.travelbuddyapp.travelBuddy.model.stop.Stop;
 
 import java.util.ArrayList;
 import java.util.Locale;

@@ -31,7 +31,8 @@
     <string name="createStop_name_hint">Name</string>
 
     <string name="stopDetail_stopName">Stopname</string>
-    <string name="stopDetail_accommodation">Stopname</string>
+    <string name="stopDetail_accommodation">Unterkunft</string>
+    <string name="stopDetail_accommodationHint">Name der Unterkunft</string>
     <string name="stopDetail_toDo">To-do</string>
     <string name="stopDetail_notes">Notizen</string>
 

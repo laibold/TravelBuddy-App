@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.travelbuddyapp.travelBuddy.model.Stop;
+import com.travelbuddyapp.travelBuddy.model.stop.Stop;
 
 import java.util.List;
 

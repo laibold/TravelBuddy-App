@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    tools:context=".ui.stops.StopDetailActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.stops.detail.StopDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/stopdetail_toolbar"
@@ -24,7 +25,6 @@
             android:minWidth="30dp"
             android:minHeight="30dp"
             android:onClick="onEditClicked"/>
-
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
@@ -45,95 +45,28 @@
             android:singleLine="true"
             android:visibility="gone"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stopdetail_accommodation_label"
-            android:paddingLeft="4dp"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/accommodation_include"
+            layout="@layout/stop_detail_accommodation"
+            android:layout_below="@id/stopdetail_stop_name"
             android:layout_height="wrap_content"
-            android:text="Unterkunft:"
-            android:textSize="18dp"
-            android:textColor="@color/colorGreyText"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/stopdetail_stop_name"/>
-
-        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginBottom="40dp"/>
+
+        <include
+            android:id="@+id/todo_include"
+            layout="@layout/stop_detail_todo"
+            android:layout_below="@id/accommodation_include"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/stopdetail_accommodation_layout"
-            android:layout_below="@id/stopdetail_accommodation_label">
-
-            <EditText
-                android:id="@+id/stopdetail_accommodation_edittext"
-                android:background="@layout/rounded_border_edittext"
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textSize="16dp"
-                android:hint="Name der Unterkunft"
-                />
-
-            <ImageButton
-                android:id="@+id/stopdetail_accommodation_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_check_circle_primary"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:visibility="gone"/>
-        </RelativeLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stopdetail_notes_label"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notizen:"
-            android:textSize="18dp"
-            android:textColor="@color/colorGreyText"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/stopdetail_accommodation_layout"/>
-
-        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginBottom="40dp"/>
+
+        <include
+            android:id="@+id/notes_include"
+            layout="@layout/stop_detail_notes"
+            android:layout_below="@id/todo_include"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/stopdetail_notes_layout"
-            android:layout_below="@id/stopdetail_notes_label">
-
-            <EditText
-                android:id="@+id/stopdetail_notes_edittext"
-                android:background="@layout/rounded_border_edittext"
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginBottom="20dp"
-                android:imeOptions="actionDone"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:singleLine="false"
-                android:textSize="16dp"
-                />
-
-            <ImageButton
-                android:id="@+id/stopdetail_notes_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_check_circle_primary"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:visibility="gone"/>
-
-        </RelativeLayout>
-
+            android:layout_width="match_parent"/>
 
 
     </RelativeLayout>

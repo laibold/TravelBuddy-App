@@ -16,10 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.model.Stop;
+import com.travelbuddyapp.travelBuddy.model.stop.Stop;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
 import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
+import com.travelbuddyapp.travelBuddy.ui.stops.detail.StopDetailActivity;
 
 import java.util.ArrayList;
 
