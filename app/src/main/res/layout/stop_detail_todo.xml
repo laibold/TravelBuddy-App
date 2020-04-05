@@ -34,7 +34,7 @@
                 android:paddingLeft="10dp"
                 android:textSize="16dp"
                 android:hint="Neues Element"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:imeOptions="actionDone"/>
 
             <ImageButton

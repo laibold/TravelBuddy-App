@@ -129,6 +129,7 @@ public class StopDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Text eingeben", Toast.LENGTH_SHORT).show();
                 } else {
                     database.toDoElementDao().insertToDoElement(new ToDoElement(text,currStop.getId()));
+                    toDoTextEdit.setText("");
                     syncAllElements();
                 }
             }
