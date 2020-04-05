@@ -24,4 +24,10 @@ public interface StopDao {
 
     @Query("UPDATE Stop set name = :name WHERE id = :id")
     void setStopName(int id, String name);
+
+    @Query("UPDATE Stop set accommodationName = :accommodationName WHERE id = :id")
+    void setAccommodationName(int id, String accommodationName);
+
+    @Query("UPDATE Stop set notes = :notes WHERE id = :id")
+    void setNotes(int id, String notes);
 }

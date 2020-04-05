@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,11 @@ public class StopDetailActivity extends AppCompatActivity {
     private Button editSaveButton;
     private EditText nameEditText;
 
+    private EditText accommodationEditText;
+    private ImageButton accomodationButton;
+    private EditText notesEditText;
+    private ImageButton notesButton;
+
     private AppRoomDatabase database;
     private Stop currStop;
 
@@ -39,8 +45,16 @@ public class StopDetailActivity extends AppCompatActivity {
         editSaveButton = findViewById(R.id.stopdetail_editSave_btn);
         nameEditText = findViewById(R.id.stopdetail_stop_name);
 
+        accommodationEditText = findViewById(R.id.stopdetail_accommodation_edittext);
+        accomodationButton = findViewById(R.id.stopdetail_accommodation_button);
+
+        notesEditText = findViewById(R.id.stopdetail_notes_edittext);
+        notesButton = findViewById(R.id.stopdetail_notes_button);
+
         configToolbar();
         configStatusBar();
+        configEditAccommodation();
+        configEditNotes();
     }
 
     private void configToolbar(){
@@ -62,6 +76,7 @@ public class StopDetailActivity extends AppCompatActivity {
     public void onEditClicked(View view) {
         editSaveButton.setBackground(getDrawable(R.drawable.ic_save_white));
         nameEditText.setVisibility(View.VISIBLE);
+        nameEditText.setText(currStop.getName());
         nameEditText.requestFocus();
         showKeyboard();
         editSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +89,6 @@ public class StopDetailActivity extends AppCompatActivity {
 
     public void onSaveClicked(View view) {
         editSaveButton.setBackground(getDrawable(R.drawable.ic_edit_white));
-        Toast.makeText(getApplicationContext(),"SAVE", Toast.LENGTH_SHORT).show();
         editSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +105,75 @@ public class StopDetailActivity extends AppCompatActivity {
         nameEditText.setVisibility(View.GONE);
     }
 
+    private void configEditAccommodation() {
+        accommodationEditText.setText(currStop.getAccommodationName());
+
+        accommodationEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    //User clicked in EditText
+                    accomodationButton.setVisibility(View.VISIBLE);
+                } else{
+                    //User left in EditText
+                    saveAccommodation();
+                }
+            }
+        });
+
+        accomodationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accommodationEditText.clearFocus();
+            }
+        });
+    }
+
+    private void saveAccommodation(){
+        accomodationButton.setVisibility(View.GONE);
+        closeKeyboard();
+        database.stopDao().setAccommodationName(currStop.getId(), accommodationEditText.getText().toString().trim());
+        Toast.makeText(getApplicationContext(),"saved accommodation", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void configEditNotes() {
+        notesEditText.setText(currStop.getNotes());
+
+        notesEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    //User clicked in EditText
+                    notesButton.setVisibility(View.VISIBLE);
+                } else{
+                    //User left in EditText
+                    saveNotes();
+                }
+            }
+        });
+
+        notesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notesEditText.clearFocus();
+            }
+        });
+    }
+
+    private void saveNotes(){
+        notesButton.setVisibility(View.GONE);
+        closeKeyboard();
+        database.stopDao().setNotes(currStop.getId(), notesEditText.getText().toString().trim());
+        Toast.makeText(getApplicationContext(),"saved notes", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
     public void showKeyboard(){
         InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -100,8 +183,5 @@ public class StopDetailActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
-
-
-
 
 }
