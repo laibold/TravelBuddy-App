@@ -31,15 +31,4 @@
         app:borderWidth="0dp"
         android:tint="@color/colorIconBlack"/>
 
-    <Button
-        android:id="@+id/whatsappBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="35dp"
-        android:layout_weight="1"
-        android:onClick="onWhatsappPressed"
-        android:text="WhatsApppp" />
-
 </RelativeLayout>

@@ -7,24 +7,29 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.travelbuddyapp.travelBuddy.R;
 import com.travelbuddyapp.travelBuddy.model.Config;
-import com.travelbuddyapp.travelBuddy.model.Stop;
 import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
+import com.travelbuddyapp.travelBuddy.model.stop.Stop;
+import com.travelbuddyapp.travelBuddy.model.stop.ToDoElement;
 import com.travelbuddyapp.travelBuddy.model.trip.Trip;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.ConfigDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.PackingItemDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.StopDao;
+import com.travelbuddyapp.travelBuddy.persistence.room.dao.ToDoElementDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.TripDao;
 
-@Database(entities = {Config.class, Trip.class, Stop.class, PackingItem.class}, version = 7, exportSchema = false)
+@Database(entities = {Config.class, Trip.class, Stop.class, PackingItem.class, ToDoElement.class}, version = 10, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 
-    private static final String DB_NAME = "database.db"; //TODO magic
+    private static String DB_NAME;
     private static volatile AppRoomDatabase instance;
 
     public static synchronized AppRoomDatabase getInstance(Context context){
         if (instance == null){
+            String dbName = context.getApplicationContext().getResources().getString(R.string.database_name);
+            DB_NAME = dbName;
             instance = create(context);
         }
         return instance;
@@ -41,4 +46,5 @@ public abstract class AppRoomDatabase extends RoomDatabase {
     public abstract TripDao tripDao();
     public abstract StopDao stopDao();
     public abstract PackingItemDao packingItemDao();
+    public abstract ToDoElementDao toDoElementDao();
 }

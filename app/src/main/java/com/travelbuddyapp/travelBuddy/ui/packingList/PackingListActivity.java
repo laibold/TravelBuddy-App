@@ -27,7 +27,7 @@ public class PackingListActivity extends AppCompatActivity {
     private PackingListAdapter packingListAdapter;
     private AppRoomDatabase database;
     private NavigationItemSelectedListener navigationItemSelectedListener;
-    private ArrayList<PackingItem> allItems = new ArrayList<>();
+    private ArrayList<PackingItem> allItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class PackingListActivity extends AppCompatActivity {
     }
 
     private void configItemList() {
+        allItems = new ArrayList<>();
         packingListAdapter = new PackingListAdapter(this, allItems);
         itemListView = findViewById(R.id.content_packinglist_itemlist);
         itemListView.setAdapter(packingListAdapter);
@@ -86,7 +87,7 @@ public class PackingListActivity extends AppCompatActivity {
 
     private void syncAllItems() {
         //TODO hier anstaendig, wahrscheinlich LiveData?
-        int currentTripId = database.configDao().getCurrentTrip();
+        int currentTripId = database.configDao().getCurrentTripId();
 
         ArrayList<PackingItem> arrayList = new ArrayList<>(database.packingItemDao().getPackingItemsByTripId(currentTripId));
         allItems.clear();

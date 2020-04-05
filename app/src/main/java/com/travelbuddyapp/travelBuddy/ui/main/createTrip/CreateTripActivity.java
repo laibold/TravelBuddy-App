@@ -6,12 +6,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.travelbuddyapp.travelBuddy.R;
@@ -49,6 +52,14 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         selectImageReqCode = getResources().getInteger(R.integer.selectImage);
 
         setSpinner();
+        configStatusBar();
+    }
+
+    private void configStatusBar(){
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
 
     public void selectImage(View v){

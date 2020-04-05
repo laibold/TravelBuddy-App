@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.travelbuddyapp.travelBuddy.model.Stop;
+import com.travelbuddyapp.travelBuddy.model.stop.Stop;
 
 import java.util.List;
 
@@ -21,4 +21,13 @@ public interface StopDao {
 
     @Query("SELECT * FROM Stop")
     List<Stop> getAllStops();
+
+    @Query("UPDATE Stop set name = :name WHERE id = :id")
+    void setStopName(int id, String name);
+
+    @Query("UPDATE Stop set accommodationName = :accommodationName WHERE id = :id")
+    void setAccommodationName(int id, String accommodationName);
+
+    @Query("UPDATE Stop set notes = :notes WHERE id = :id")
+    void setNotes(int id, String notes);
 }

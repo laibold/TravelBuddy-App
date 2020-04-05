@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stopdetail_toDo_label"
+        android:paddingLeft="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stopDetail_toDo"
+        android:textSize="18dp"
+        android:textColor="@color/colorGreyText"
+        android:layout_marginBottom="7dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stopdetail_toDo_label"
+        android:background="@drawable/rounded_border_listview">
+
+        <LinearLayout
+            android:id="@+id/stopdetail_toDo_newElementLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/stopdetail_toDo_textEdit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="10dp"
+                android:textSize="16dp"
+                android:hint="Neues Element"
+                android:inputType="text"
+                android:imeOptions="actionDone"/>
+
+            <ImageButton
+                android:id="@+id/stopdetail_addToDoElement_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_add_circle_outline_black"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginRight="11dp"/>
+
+        </LinearLayout >
+
+        <ListView
+            android:id="@+id/stopdetail_toDo_listview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@id/stopdetail_toDo_newElementLayout"
+            android:divider="@null"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -21,7 +21,6 @@ public class PackingListAdapter extends ArrayAdapter<PackingItem> {
         super(context, R.layout.packinglist_cell, items);
         this.context = context;
         this.items = items;
-        this.setNotifyOnChange(true);
     }
 
     @Override

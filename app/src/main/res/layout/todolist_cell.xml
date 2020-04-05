@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.stops.detail.StopDetailActivity"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
+
+    <CheckBox
+        android:id="@+id/todolist_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="4dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/todolist_elementtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:padding="4dp"
+        android:text="Zu tuende Tuung"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorGreyText"
+        android:textSize="16dp"/>
+
+</LinearLayout>

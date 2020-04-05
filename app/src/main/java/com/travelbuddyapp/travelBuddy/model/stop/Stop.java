@@ -1,4 +1,4 @@
-package com.travelbuddyapp.travelBuddy.model;
+package com.travelbuddyapp.travelBuddy.model.stop;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -33,6 +33,9 @@ public class Stop implements Parcelable {
 
     @ColumnInfo
     private String name;
+
+    @ColumnInfo
+    private String accommodationName;
 
     @ColumnInfo
     private String notes;
@@ -70,6 +73,22 @@ public class Stop implements Parcelable {
         this.tripId = tripId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAccommodationName() {
+        return accommodationName;
+    }
+
+    public void setAccommodationName(String accommodationName) {
+        this.accommodationName = accommodationName;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -104,14 +123,6 @@ public class Stop implements Parcelable {
      */
     public void setStars(int stars) {
         this.stars = stars;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String generateMessage(String[] salutations, String[] arrivals, String[] closings) {

@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +27,6 @@ import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 import com.travelbuddyapp.travelBuddy.ui.main.createTrip.CreateTripActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCurrentTripChecked(){
-        int currentTripId = database.configDao().getCurrentTrip();
+        int currentTripId = database.configDao().getCurrentTripId();
         for (int i=0; i < allTrips.size(); i++){
             if (allTrips.get(i).getId() == currentTripId) {
                 tripListView.setItemChecked(i, true);
@@ -142,17 +140,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTripSelected(int position){
         int databaseID = allTrips.get(position).getId();
-        database.configDao().setCurrentTrip(databaseID);
+        database.configDao().setCurrentTripId(databaseID);
         tripListView.setItemChecked(position, true);
-        int pos = tripListView.getCheckedItemPosition();
-        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
         drawerHandler.setDrawerData();
     }
 
     public void onResetPressed(View v){
         database.tripDao().clear();
         syncAllTrips();
-        database.configDao().setCurrentTrip(-1);
+        database.configDao().setCurrentTripId(-1);
     }
 
     public void onExamplesPressed(View v){
@@ -165,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         insertTripWithPackingList(vietbotschkok);
         insertTripWithPackingList(portugal);
         insertTripWithPackingList(uganda);
-
     }
 
     //Result from createTrip
@@ -180,10 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertTripWithPackingList(Trip trip){
         int tripId = (int) database.tripDao().insertTrip(trip);
-        database.configDao().setCurrentTrip(tripId);
-        setCurrentTripChecked();
-
-        List<Trip> allTrips = database.tripDao().getTrips();
+        database.configDao().setCurrentTripId(tripId);
 
         //PackingItems erstellen
         ArrayList<PackingItem> list = jsonHandler.getPackingItems(trip.getTripType(), getResources().openRawResource(R.raw.packinglists_de));
@@ -193,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         syncAllTrips();
+        setCurrentTripChecked();
     }
 
     private void syncAllTrips(){

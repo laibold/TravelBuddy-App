@@ -1,4 +1,6 @@
 <resources>
+    <string name="database_name">database.db</string>
+
     <string name="currTrip">Reise Reise</string>
 
     <string name="app_name">TravelBuddy</string>
@@ -27,6 +29,16 @@
 
     <string name="createStop_InfoTitle">Neuer Stop</string>
     <string name="createStop_name_hint">Name</string>
+
+    <string name="stopDetail_stopName">Stopname</string>
+    <string name="stopDetail_accommodation">Unterkunft</string>
+    <string name="stopDetail_accommodationHint">Name der Unterkunft</string>
+    <string name="stopDetail_toDo">To-do</string>
+    <string name="stopDetail_notes">Notizen</string>
+
+    <string name="stopDetail_menu_share">Teilen</string>
+    <string name="stopDetail_menu_tripadvisor">Tripadvisor</string>
+    <string name="stopDetail_menu_weather">Wetter</string>
 
     <string name="error_entername">Bitte Namen angeben!</string>
     <string name="error_enterdate">Bitte Datum angeben!</string>

@@ -13,6 +13,17 @@ public class Config {
     @ColumnInfo
     private int currentTripId;
 
+    @ColumnInfo
+    private int currentStopId;
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
     public int getCurrentTripId() {
         return currentTripId;
     }
@@ -21,11 +32,11 @@ public class Config {
         this.currentTripId = currentTripId;
     }
 
-    public int getId(){
-        return id;
+    public int getCurrentStopId() {
+        return currentStopId;
     }
 
-    public void setId(int id){
-        this.id = id;
+    public void setCurrentStopId(int currentStopId) {
+        this.currentStopId = currentStopId;
     }
 }

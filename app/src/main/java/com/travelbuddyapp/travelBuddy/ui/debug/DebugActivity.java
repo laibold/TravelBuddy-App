@@ -29,7 +29,7 @@ public class DebugActivity extends AppCompatActivity {
 
         JsonHandler jsonHandler = new JsonHandler();
 
-        int currTripId = database.configDao().getCurrentTrip();
+        int currTripId = database.configDao().getCurrentTripId();
         Trip currTrip = database.tripDao().getTrip(currTripId);
 
         String s = "";
