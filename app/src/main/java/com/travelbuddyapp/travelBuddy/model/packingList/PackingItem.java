@@ -39,6 +39,13 @@ public class PackingItem {
         this.packingListType = packingListType;
     }
 
+    @Ignore //for Room
+    public PackingItem(String name, PackingListType packingListType, int tripId) {
+        this.name = name;
+        this.packingListType = packingListType;
+        this.tripId = tripId;
+    }
+
     public int getId() {
         return id;
     }

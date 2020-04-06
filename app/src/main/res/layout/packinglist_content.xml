@@ -2,14 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/packinglist_content_add_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/packinglist_content_textedit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="10dp"
+            android:textSize="18dp"
+            android:hint="Neues Element"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionDone"/>
+
+        <ImageButton
+            android:id="@+id/packinglist_content_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_circle_outline_black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="2dp"
+            android:scaleY="1.2"
+            android:scaleX="1.2"
+            android:layout_marginRight="11dp"/>
+
+    </LinearLayout >
+
     <ListView
         android:id="@+id/packinglist_itemlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="70dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="50dp"
-        android:choiceMode="singleChoice"/>
+        android:choiceMode="singleChoice"
+        android:layout_below="@id/packinglist_content_add_layout"/>
 
 </RelativeLayout>

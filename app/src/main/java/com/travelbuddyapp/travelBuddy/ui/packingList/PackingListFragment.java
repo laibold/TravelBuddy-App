@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,6 +24,8 @@ import java.util.List;
 
 public class PackingListFragment extends Fragment {
 
+    private EditText addTextEdit;
+    private ImageButton addButton;
     private ListView itemListView;
 
     private ArrayList<PackingItem> allItems;
@@ -28,11 +33,13 @@ public class PackingListFragment extends Fragment {
     private AppRoomDatabase database;
     private Activity activity;
     private PackingListType packingListType;
+    private int currTripId;
 
     public PackingListFragment(Activity activity, AppRoomDatabase database, PackingListType packingListType){
         this.database = database;
         this.activity = activity;
         this.packingListType = packingListType;
+        this.currTripId = database.configDao().getCurrentTripId();
     }
 
     @Nullable
@@ -40,7 +47,28 @@ public class PackingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.packinglist_content, container, false);
         configItemList(view);
+        configAddElementItems(view);
         return view;
+    }
+
+    private void configAddElementItems(View view){
+        addTextEdit = view.findViewById(R.id.packinglist_content_textedit);
+
+        addButton = view.findViewById(R.id.packinglist_content_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = addTextEdit.getText().toString();
+                if (text.trim().length() == 0){
+                    Toast.makeText(getActivity(),"Text eingeben",Toast.LENGTH_SHORT).show();
+                } else {
+                    PackingItem newItem = new PackingItem(addTextEdit.getText().toString(), packingListType, currTripId);
+                    database.packingItemDao().insertPackingItem(newItem);
+                    addTextEdit.setText("");
+                    syncAllItems();
+                }
+            }
+        });
     }
 
     private void configItemList(View view) {

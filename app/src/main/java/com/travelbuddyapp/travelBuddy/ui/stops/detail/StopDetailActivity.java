@@ -284,9 +284,6 @@ public class StopDetailActivity extends AppCompatActivity {
 
 
 
-
-
-
     public void showKeyboard(){
         InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
