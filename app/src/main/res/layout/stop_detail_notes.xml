@@ -28,7 +28,6 @@
             android:imeOptions="actionDone"
             android:gravity="top|left"
             android:inputType="textMultiLine|textCapSentences"
-            android:singleLine="false"
             android:textSize="16dp"
             />
 

@@ -42,7 +42,6 @@
             android:hint="@string/createStop_name_hint"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
-            android:singleLine="true"
             android:visibility="gone"/>
 
         <include

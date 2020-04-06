@@ -1,8 +1,82 @@
 {
-  "HOTEL": ["Pants", "Shorts", "Shirts", "Laptop"],
-  "CIRCULAR": ["Phone", "Book", "Pants", "Money"],
-  "BACKPACKING": ["Medikamente", "Geld", "Reisepass", "Impfpass", "Kreditkarte", "Schloss", "Fön", "Kamera", "Nackenkissen", "T-Shirts", "Pullis", "Jacke", "Socken", "Unterhosen", "Hosen"],
-  "FESTIVAL": ["Tickets", "Handy", "Bauchtasche", "Zelt", "Schlafsack", "T-Shirts", "Zahnbürste", "Handtuch", "Grill", "Musikanlage", "Ohrenstöpsel", "Bier"],
-  "CAMPING": ["Tent", "Campfire", "Water", "Bedroll"],
-  "OTHER": ["Whatever you want"]
+   "HOTEL":{
+      "OWN":[
+         {"name": "Lange Hosen", "factor": 0.3},
+         {"name": "Kurze Hosen", "factor": 0.4},
+         {"name": "T-Shirts", "factor": 0.8},
+         {"name": "Laptop", "factor": 0}
+      ],
+      "SHARED":[
+         {"name": "Sonnenmilch", "factor": 0},
+         {"name": "Sonnenschirm", "factor": 0},
+         {"name": "Fön", "factor": 0}
+      ]
+   },
+  "CIRCULAR":{
+      "OWN":[
+         {"name": "Handy", "factor": 0},
+         {"name": "Buch", "factor": 0},
+         {"name": "Hosen", "factor": 0.8},
+         {"name": "Geld", "factor": 0}
+      ],
+      "SHARED":[
+         {"name": "Auto", "factor": 0},
+         {"name": "Landkarte", "factor": 0},
+         {"name": "Seile", "factor": 0}
+      ]
+    },
+  "BACKPACKING":{
+      "OWN":[
+          {"name": "Medikamente", "factor": 0},
+          {"name": "Geld", "factor": 0},
+          {"name": "Reisepass", "factor": 0},
+          {"name": "Impfpass", "factor": 0},
+          {"name": "T-Shirts", "factor": 0.8},
+          {"name": "Kreditkarte", "factor": 0},
+          {"name": "Schloss", "factor": 0},
+          {"name": "Pullis", "factor": 0.2},
+          {"name": "Socken", "factor": 1.2},
+          {"name": "Unterhosen", "factor": 1.2},
+          {"name": "Hosen", "factor": 0.5}
+      ],
+      "SHARED":[
+         {"name": "Fön", "factor": 0},
+         {"name": "Taschenmesser", "factor": 0},
+         {"name": "Wörterbuch", "factor": 0}
+      ] 
+    },
+  "FESTIVAL":{
+      "OWN":[
+          {"name": "Tickets", "factor": 0},
+          {"name": "Handy", "factor": 0},
+          {"name": "Bauchtasche", "factor": 0},
+          {"name": "Schlafsack", "factor": 0},
+          {"name": "T-Shirts", "factor": 1},
+          {"name": "Zahnbürste", "factor": 0},
+          {"name": "Handtuch", "factor": 0},
+          {"name": "Ohrenstöpsel", "factor": 0}
+      ],
+      "SHARED":[
+          {"name": "Zelt", "factor": 0},
+          {"name": "Grill", "factor": 0},
+          {"name": "Musikanlage", "factor": 0},
+          {"name": "Bier", "factor": 0}
+      ] 
+    },
+  "CAMPING":{
+      "OWN":[
+         {"name": "Schlafsack", "factor": 0},
+         {"name": "Buch", "factor": 0},
+         {"name": "Zahnbürste", "factor": 0}
+      ],
+      "SHARED":[
+         {"name": "Zelt", "factor": 0},
+         {"name": "Lagerfeuer", "factor": 0},
+         {"name": "Wasser", "factor": 0}
+      ]
+    },
+  "OTHER":{
+        "OWN": [],
+        "SHARED": []
+    }
 }

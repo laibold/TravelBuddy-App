@@ -27,12 +27,16 @@ public class PackingItem {
     @ColumnInfo
     private boolean checked;
 
+    @ColumnInfo
+    private PackingListType packingListType;
+
     public PackingItem() {
     }
 
     @Ignore //for Room
-    public PackingItem(String name) {
+    public PackingItem(String name, PackingListType packingListType) {
         this.name = name;
+        this.packingListType = packingListType;
     }
 
     public int getId() {
@@ -71,8 +75,12 @@ public class PackingItem {
         this.checked = !this.checked;
     }
 
-    @Override
-    public int hashCode() {
-        return this.name.hashCode() * Boolean.hashCode(this.checked);
+    public PackingListType getPackingListType() {
+        return packingListType;
     }
+
+    public void setPackingListType(PackingListType packingListType) {
+        this.packingListType = packingListType;
+    }
+
 }

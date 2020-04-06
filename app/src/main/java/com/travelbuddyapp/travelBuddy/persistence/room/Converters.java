@@ -2,13 +2,14 @@ package com.travelbuddyapp.travelBuddy.persistence.room;
 
 import androidx.room.TypeConverter;
 
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingListType;
 import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 
 import java.time.LocalDate;
 
 public class Converters {
     @TypeConverter
-    public static TripType fromOrdinal(int ordinal) {
+    public static TripType fromTripTypeOrdinal(int ordinal) {
         return TripType.values()[ordinal];
     }
 
@@ -36,6 +37,20 @@ public class Converters {
             return null;
         } else {
             return date.toString();
+        }
+    }
+
+    @TypeConverter
+    public static PackingListType fromPackingListTypeOrdinal(int ordinal) {
+        return PackingListType.values()[ordinal];
+    }
+
+    @TypeConverter
+    public static int packingListTypeToOrdinal(PackingListType packingListType) {
+        if(packingListType != null){
+            return packingListType.ordinal();
+        } else {
+            return 0;
         }
     }
 }

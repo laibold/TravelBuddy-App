@@ -68,8 +68,7 @@
             android:layout_toEndOf="@id/createTrip_tripicon_cardView"
             android:hint="@string/createTrip_name_hint"
             android:imeOptions="actionDone"
-            android:inputType="text"
-            android:singleLine="true" />
+            android:inputType="textCapSentences"/>
 
         <Spinner
             android:id="@+id/createTrip_triptype_spinner"

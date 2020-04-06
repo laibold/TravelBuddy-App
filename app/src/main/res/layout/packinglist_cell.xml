@@ -11,7 +11,7 @@
         android:id="@+id/packinglist_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="12dp"
         android:scaleX="1.1"
         android:scaleY="1.1"
         android:clickable="false"/>
@@ -20,11 +20,10 @@
         android:id="@+id/packinglist_stoptitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:padding="2dp"
         android:text="Gepackte Packung"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/colorGreyText"
-        android:textStyle="bold"/>
+        android:textColor="@color/colorGreyText"/>
 
 </LinearLayout>

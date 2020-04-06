@@ -13,7 +13,7 @@ public enum TripType {
 
     private final int stringResourceID;
 
-    private TripType(int stringResourceID){
+    TripType(int stringResourceID){
         this.stringResourceID = stringResourceID;
     }
 

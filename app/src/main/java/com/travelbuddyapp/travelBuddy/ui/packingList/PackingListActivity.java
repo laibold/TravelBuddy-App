@@ -1,33 +1,28 @@
 package com.travelbuddyapp.travelBuddy.ui.packingList;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.travelbuddyapp.travelBuddy.R;
-import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingListType;
 import com.travelbuddyapp.travelBuddy.persistence.room.AppRoomDatabase;
 import com.travelbuddyapp.travelBuddy.ui.DrawerHandler;
 import com.travelbuddyapp.travelBuddy.ui.NavigationItemSelectedListener;
 
-import java.util.ArrayList;
-
 public class PackingListActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
-    private ListView itemListView;
+    private ViewPager mViewPager;
 
-    private PackingListAdapter packingListAdapter;
     private AppRoomDatabase database;
     private NavigationItemSelectedListener navigationItemSelectedListener;
-    private ArrayList<PackingItem> allItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +31,20 @@ public class PackingListActivity extends AppCompatActivity {
 
         database = AppRoomDatabase.getInstance(getApplicationContext());
 
-        configDrawerNavigation();
-        configItemList();
+        mViewPager = findViewById(R.id.content_packinglist_container);
+        setupViewPager(mViewPager);
+        TabLayout tabLayout = findViewById(R.id.content_tablayout);
+        tabLayout.setupWithViewPager(mViewPager);
 
+        configDrawerNavigation();
         new DrawerHandler(this).setDrawerData();
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new PackingListFragment(this, database, PackingListType.OWN), getString(R.string.packingList_own));
+        adapter.addFragment(new PackingListFragment(this, database, PackingListType.OWN.SHARED), getString(R.string.packingList_shared));
+        viewPager.setAdapter(adapter);
     }
 
     private void configDrawerNavigation() {
@@ -54,45 +59,6 @@ public class PackingListActivity extends AppCompatActivity {
 
         navigationItemSelectedListener = new NavigationItemSelectedListener(PackingListActivity.this, drawer);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-    }
-
-    private void configItemList() {
-        allItems = new ArrayList<>();
-        packingListAdapter = new PackingListAdapter(this, allItems);
-        itemListView = findViewById(R.id.content_packinglist_itemlist);
-        itemListView.setAdapter(packingListAdapter);
-
-        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onListItemClicked(position);
-            }
-        });
-
-        //Hinzufuegen nur ueber database
-
-        syncAllItems();
-    }
-
-    private void onListItemClicked(int position) {
-        allItems.get(position).toggleChecked();
-        packingListAdapter.notifyDataSetChanged();
-        updateTable(position);
-    }
-
-    private void updateTable(int position){
-        PackingItem item = allItems.get(position);
-        database.packingItemDao().setPackingItemChecked(item.getId(), item.isChecked());
-    }
-
-    private void syncAllItems() {
-        //TODO hier anstaendig, wahrscheinlich LiveData?
-        int currentTripId = database.configDao().getCurrentTripId();
-
-        ArrayList<PackingItem> arrayList = new ArrayList<>(database.packingItemDao().getPackingItemsByTripId(currentTripId));
-        allItems.clear();
-        allItems.addAll(arrayList);
-        packingListAdapter.notifyDataSetChanged();
     }
 
 }

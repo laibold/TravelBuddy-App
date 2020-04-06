@@ -1,7 +1,8 @@
 package com.travelbuddyapp.travelBuddy.persistence;
 
-import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 import com.travelbuddyapp.travelBuddy.model.packingList.PackingItem;
+import com.travelbuddyapp.travelBuddy.model.packingList.PackingListType;
+import com.travelbuddyapp.travelBuddy.model.trip.TripType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +22,7 @@ public class JsonHandler  {
      * @return ArrayList with PackingItems that can be used as a packing list
      */
     public ArrayList<PackingItem> getPackingItems(TripType tripType, InputStream inputStream){
+        String[] listTypes = PackingListType.getNames();
         ArrayList<PackingItem> packingItems = new ArrayList<>();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -37,13 +39,24 @@ public class JsonHandler  {
         }
 
         try {
-            JSONObject jObject = new JSONObject(byteArrayOutputStream.toString());
-            JSONArray jArray = jObject.getJSONArray(tripType.toString()); //eg. BACKPACKING
+            JSONObject jFileObject = new JSONObject(byteArrayOutputStream.toString());
+            JSONObject tripTypeObject = jFileObject.getJSONObject(tripType.toString());
+            //JSONArray tripTypeArray = jFileObject.getJSONArray(tripType.toString()); //eg. BACKPACKING
+
+            JSONArray listTypeArray;
             String name = "";
-            for (int i=0; i < jArray.length(); i++){
-                name = jArray.getString(i);
-                packingItems.add(new PackingItem(name));
+            PackingListType type;
+            for (int i = 0; i < listTypes.length; i++) {
+                listTypeArray = tripTypeObject.getJSONArray(listTypes[i]);
+                for (int j = 0; j < listTypeArray.length(); j++) {
+                    JSONObject itemObject = listTypeArray.getJSONObject(j);    // {"name": "money", "factor": 0}
+                    //double factor = listTypeArray.getDouble(j);             // 0 - for later use
+                    name = itemObject.getString("name");               //"money"
+                    type = PackingListType.valueOf(listTypes[i]);            //OWN or SHARED
+                    packingItems.add(new PackingItem(name, type));
+                }
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

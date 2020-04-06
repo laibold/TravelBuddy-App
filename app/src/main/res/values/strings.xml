@@ -40,6 +40,9 @@
     <string name="stopDetail_menu_tripadvisor">Tripadvisor</string>
     <string name="stopDetail_menu_weather">Wetter</string>
 
+    <string name="packingList_own">EIGENE</string>
+    <string name="packingList_shared">GETEILT</string>
+
     <string name="error_entername">Bitte Namen angeben!</string>
     <string name="error_enterdate">Bitte Datum angeben!</string>
 

@@ -19,7 +19,7 @@ import com.travelbuddyapp.travelBuddy.persistence.room.dao.StopDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.ToDoElementDao;
 import com.travelbuddyapp.travelBuddy.persistence.room.dao.TripDao;
 
-@Database(entities = {Config.class, Trip.class, Stop.class, PackingItem.class, ToDoElement.class}, version = 10, exportSchema = false)
+@Database(entities = {Config.class, Trip.class, Stop.class, PackingItem.class, ToDoElement.class}, version = 11, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppRoomDatabase extends RoomDatabase {
 

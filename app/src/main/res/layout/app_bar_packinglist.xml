@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.travelbuddyapp.travelBuddy.ui.packingList.PackingListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_packinglist_appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -20,6 +22,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_packinglist" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/content_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appbar_packinglist_appbarlayout"
+        app:tabBackground="@android:color/white"
+        app:tabIndicatorColor="@android:color/black"
+        android:background="#80FFFFFF"
+        android:elevation="5dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/content_packinglist_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@id/content_tablayout"
+        android:paddingTop="10dp"/>
 
 </RelativeLayout>
